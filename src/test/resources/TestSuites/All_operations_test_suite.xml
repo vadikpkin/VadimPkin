@@ -1,0 +1,30 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="All operation suite">
+
+    <test name="Addition test">
+        <classes>
+            <class name="hw1.CalculatorAdditionTest"></class>
+        </classes>
+    </test>
+
+    <test name="Subtraction test">
+        <classes>
+            <class name="hw1.CalculatorSubtractionTest"></class>
+        </classes>
+    </test>
+
+    <test name="Multiplication test">
+        <classes>
+            <class name="hw1.CalculatorMultiplicationTest"></class>
+        </classes>
+    </test>
+
+    <test name="Division test">
+        <classes>
+            <class name="hw1.CalculatorDivisionTest"></class>
+        </classes>
+    </test>
+
+
+
+</suite>
