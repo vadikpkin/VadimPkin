@@ -1,6 +1,5 @@
 package hw2;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -78,6 +77,8 @@ public class JdiLightLoginTest extends AbstractTestBase{
         List<String> sideBarMenuText = sideBarMenu.stream().map(elem -> elem.getText()).collect(Collectors.toList());
         softAssert.assertEquals(sideBarMenuText, expectedSideBarMenuText, "Wrong sidebar menu text");
         softAssert.assertAll();
+        //12. Close Browser
+        //tearDown() method in AbstractTestBase
     }
 
 }
