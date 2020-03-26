@@ -6,10 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class JdiLightLoginTest extends AbstractTestBase{
 
@@ -68,14 +65,13 @@ public class JdiLightLoginTest extends AbstractTestBase{
         //11. Assert that there are 5 items in the Left Section are displayed and they have proper text
         List<WebElement> sideBarMenu = driver.findElements(By.cssSelector(".sidebar-menu > li"));
         sideBarMenu.forEach(elem -> softAssert.assertTrue(elem.isDisplayed()));
-        List<String> expectedSideBarMenuText = new ArrayList<>();
-        expectedSideBarMenuText.add("Home");
-        expectedSideBarMenuText.add("Contact form");
-        expectedSideBarMenuText.add("Service");
-        expectedSideBarMenuText.add("Metals & Colors");
-        expectedSideBarMenuText.add("Elements packs");
-        List<String> sideBarMenuText = sideBarMenu.stream().map(elem -> elem.getText()).collect(Collectors.toList());
-        softAssert.assertEquals(sideBarMenuText, expectedSideBarMenuText, "Wrong sidebar menu text");
+        String expectedSideBarMenuText = "Home\n" +
+                                         "Contact form\n" +
+                                         "Service\n" +
+                                         "Metals & Colors\n" +
+                                         "Elements packs";
+        softAssert.assertEquals(driver.findElement(By.cssSelector(".sidebar-menu")).getText(), expectedSideBarMenuText,
+                "Wrong sidebar menu text");
         softAssert.assertAll();
         //12. Close Browser
         //tearDown() method in AbstractTestBase
