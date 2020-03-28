@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -15,21 +14,12 @@ public class Exercise2 extends AbstractTestBase {
     @Test
     public void exerciseTwoTest() {
         //1. Open test site by URL
-        driver.get(URL);
-        driver.manage().window().maximize();
+        openTestSite();
         //2. Assert Browser title
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(driver.getTitle(), "Home Page", "Wrong browser title");
         //3. Perform login
-        String username = "Roman";
-        String pass = "Jdi1234";
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user-icon"))).click();
-        wait.until(ExpectedConditions.attributeToBe(By.className("uui-profile-menu"), "class",
-                "dropdown uui-profile-menu open"));
-        driver.findElement(By.id("name")).sendKeys(username);
-        driver.findElement(By.id("password")).sendKeys(pass);
-        driver.findElement(By.id("login-button")).click();
+        login("Roman", "Jdi1234");
         //4. Assert Username is logged
         WebElement userName = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user-name")));
         softAssert.assertTrue(userName.isDisplayed());
