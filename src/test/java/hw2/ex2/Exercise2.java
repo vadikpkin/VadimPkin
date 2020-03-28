@@ -1,6 +1,6 @@
 package hw2.ex2;
 
-import hw2.base.AbstractTestBase;
+import hw2.base.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 
-public class Exercise2 extends AbstractTestBase {
+public class Exercise2 extends TestBase {
 
     @Test
     public void exerciseTwoTest() {
