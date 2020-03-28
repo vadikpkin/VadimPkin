@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Homework2 test suite">
+
+    <suite-files>
+        <suite-file path="First_Exercise_suite.xml"></suite-file>
+        <suite-file path="Second_Exercise_suite.xml"></suite-file>
+    </suite-files>
+
+</suite>

@@ -1,6 +1,6 @@
 package hw2.ex1;
 
-import hw2.AbstractTestBase;
+import hw2.base.AbstractTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,12 +9,10 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import java.util.List;
 
-public class JdiLightLoginTest extends AbstractTestBase {
-
-    private final static String URL = "https://jdi-testing.github.io/jdi-light/index.html";
+public class Exercise1 extends AbstractTestBase {
 
     @Test
-    public void loginTest() {
+    public void exerciseOneTest() {
         //1. Open test site by URL
         driver.get(URL);
         driver.manage().window().maximize();
@@ -26,14 +24,18 @@ public class JdiLightLoginTest extends AbstractTestBase {
         String pass = "Jdi1234";
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user-icon"))).click();
+        wait.until(ExpectedConditions.attributeToBe(By.className("uui-profile-menu"), "class",
+                "dropdown uui-profile-menu open"));
         driver.findElement(By.id("name")).sendKeys(username);
         driver.findElement(By.id("password")).sendKeys(pass);
         driver.findElement(By.id("login-button")).click();
         //4. Assert Username is logged
-        WebElement userName = driver.findElement(By.id("user-name"));
+        WebElement userName = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user-name")));
         softAssert.assertTrue(userName.isDisplayed());
         softAssert.assertEquals(userName.getText(), "ROMAN IOVLEV");
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
+        softAssert.assertEquals(driver.findElements(By.cssSelector(".m-l8 > li")).size(), 4,
+                "Wrong number of items in header");
         String expectedHeader = "HOME\n" +
                                 "CONTACT FORM\n" +
                                 "SERVICE\n" +
@@ -41,9 +43,12 @@ public class JdiLightLoginTest extends AbstractTestBase {
         String actualHeader = driver.findElement(By.className("m-l8")).getText();
         softAssert.assertEquals(actualHeader, expectedHeader, "Wrong header");
         //6. Assert that there are 4 images on the Index Page and they are displayed
-        softAssert.assertEquals(driver.findElements(By.className("benefit-icon")).size(), 4, "Wrong amount" +
-                "of images");
+        List<WebElement> benefitImages = driver.findElements(By.className("benefit-icon"));
+        benefitImages.forEach(e -> softAssert.assertTrue(e.isDisplayed()));
+        softAssert.assertEquals(benefitImages.size(), 4, "Wrong amount of images");
         //7. Assert that there are 4 texts on the Index Page under icons and they have proper text
+        softAssert.assertEquals(driver.findElements(By.className("benefit-txt")).size(),4,
+                "Wrong amount of benefit texts");
         String expectedTextUnderIcons = "To include good practices\n" +
                                         "and ideas from successful\n" +
                                         "EPAM project\n" +
@@ -72,7 +77,8 @@ public class JdiLightLoginTest extends AbstractTestBase {
                                          "Service\n" +
                                          "Metals & Colors\n" +
                                          "Elements packs";
-        softAssert.assertEquals(driver.findElement(By.cssSelector(".sidebar-menu")).getText(), expectedSideBarMenuText,
+        String actualSideBarMenuText = driver.findElement(By.cssSelector(".sidebar-menu")).getText();
+        softAssert.assertEquals(actualSideBarMenuText, expectedSideBarMenuText,
                 "Wrong sidebar menu text");
         softAssert.assertAll();
         //12. Close Browser

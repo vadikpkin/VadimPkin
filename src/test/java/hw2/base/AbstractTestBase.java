@@ -1,4 +1,4 @@
-package hw2;
+package hw2.base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +9,8 @@ import org.testng.annotations.BeforeMethod;
 public abstract class AbstractTestBase {
 
     protected WebDriver driver;
+
+    protected final static String URL = "https://jdi-testing.github.io/jdi-light/index.html";
 
     @BeforeMethod
     public void setUp() {

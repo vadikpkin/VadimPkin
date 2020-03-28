@@ -13,6 +13,9 @@
 
         <testng.version>7.1.0</testng.version>
 
+        <selenium.version>3.141.59</selenium.version>
+        <webdrivermanager.version>3.8.1</webdrivermanager.version>
+
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
 
@@ -20,12 +23,32 @@
 
     <profiles>
         <profile>
-            <id>all</id>
+            <id>hw2_exercise1</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <suite.xml></suite.xml>
+                <suite.xml>src/test/resources/suites_hw2/First_Exercise_suite.xml</suite.xml>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>hw2_exercise2</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml>src/test/resources/suites_hw2/Second_Exercise_suite.xml</suite.xml>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>hw2_selenium</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml>src/test/resources/suites_hw2/All_tests_suite.xml</suite.xml>
             </properties>
         </profile>
     </profiles>
@@ -40,12 +63,12 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
+            <version>${selenium.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>3.8.1</version>
+            <version>${webdrivermanager.version}</version>
             <scope>test</scope>
         </dependency>
 
