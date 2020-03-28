@@ -44,7 +44,7 @@
         <profile>
             <id>multiply_and_division</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <suite.xml>src/test/resources/TestSuites/Multiplication_and_division_test_suite.xml</suite.xml>
@@ -61,10 +61,11 @@
         </dependency>
 
         <dependency>
-            <groupId>com.epam</groupId>
-            <artifactId>calculator</artifactId>
-            <version>${calculator.version}</version>
-            <scope>compile</scope>
+            <groupId>com.epam.tat.module4</groupId>
+            <artifactId>calculator-1.0</artifactId>
+            <version>${calculator.version}}</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/test/resources/calculator-1.0.jar</systemPath>
         </dependency>
     </dependencies>
 
