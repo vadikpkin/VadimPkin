@@ -57,7 +57,8 @@ public class Exercise2 extends AbstractTestBase {
         //    • for dropdown there is a log row and value is corresponded to the selected value
         WebElement dropdownColorsLog = driver.findElement(By.xpath("//li[contains(text(),'Colors: value changed to Yellow')]"));
         softAssert.assertTrue(waterCheckboxLog.isDisplayed(),"Colors dropdown log is not displayed");
-
         softAssert.assertAll();
+        //12. Close Browser
+        //tearDown() method in AbstractTestBase
     }
 }
