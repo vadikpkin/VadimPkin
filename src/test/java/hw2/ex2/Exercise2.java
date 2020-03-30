@@ -25,15 +25,16 @@ public class Exercise2 extends TestBase {
         softAssert.assertTrue(userName.isDisplayed());
         softAssert.assertEquals(userName.getText(), "ROMAN IOVLEV");
         //5.Open through the header menu Service -> Different Elements Page
-        driver.findElement(By.linkText("Service")).click();
-        driver.findElement(By.linkText("Different elements")).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Service"))).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Different elements"))).click();
         //6. Select checkboxes "Water", "Wind"
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[normalize-space() = 'Water']"))).click();
-        driver.findElement(By.xpath("//label[normalize-space() = 'Wind']")).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[normalize-space() = 'Wind']"))).click();
         //7. Select radio "Selen"
-        driver.findElement(By.xpath("//label[normalize-space() = 'Selen']")).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[normalize-space() = 'Selen']"))).click();
         //8.Select in dropdown "Yellow"
-        new Select(driver.findElement(By.cssSelector(".colors select"))).selectByVisibleText("Yellow");
+        WebElement colorsDropdown = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".colors select")));
+        new Select(colorsDropdown).selectByVisibleText("Yellow");
         //9.Assert that
         //    • for each checkbox there is an individual log row and value is corresponded to the status of checkbox
         WebElement waterCheckboxLog = wait.until(ExpectedConditions.presenceOfElementLocated

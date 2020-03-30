@@ -30,7 +30,7 @@ public class Exercise1 extends TestBase {
                                 "CONTACT FORM\n" +
                                 "SERVICE\n" +
                                 "METALS & COLORS";
-        String actualHeader = driver.findElement(By.className("m-l8")).getText();
+        String actualHeader = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("m-l8"))).getText();
         softAssert.assertEquals(actualHeader, expectedHeader, "Wrong header");
         //6. Assert that there are 4 images on the Index Page and they are displayed
         List<WebElement> benefitImages = driver.findElements(By.className("benefit-icon"));
@@ -49,13 +49,15 @@ public class Exercise1 extends TestBase {
                                         "(about 20 internal and\n" +
                                         "some external projects),\n" +
                                         "wish to get more…";
-        String actualTextUnderIcons = driver.findElement(By.className("benefits")).getText();
+        String actualTextUnderIcons = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("benefits"))).getText();
         softAssert.assertEquals(actualTextUnderIcons, expectedTextUnderIcons, "Wrong text under icons");
         //8. Assert that there is the iframe with “Frame Button” exist
-        softAssert.assertTrue(driver.findElement(By.id("frame")).isDisplayed());
+        WebElement iFrame = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("frame")));
+        softAssert.assertTrue(iFrame.isDisplayed());
         //9. Switch to the iframe and check that there is “Frame Button” in the iframe
         driver.switchTo().frame("frame");
-        softAssert.assertTrue(driver.findElement(By.id("button-frame")).isDisplayed());
+        WebElement iFrameButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("button-frame")));
+        softAssert.assertTrue(iFrameButton.isDisplayed());
         //10. Switch to original window back
         driver.switchTo().defaultContent();
         //11. Assert that there are 5 items in the Left Section are displayed and they have proper text
@@ -67,7 +69,8 @@ public class Exercise1 extends TestBase {
                                          "Service\n" +
                                          "Metals & Colors\n" +
                                          "Elements packs";
-        String actualSideBarMenuText = driver.findElement(By.cssSelector(".sidebar-menu")).getText();
+        String actualSideBarMenuText = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".sidebar-menu")))
+                .getText();
         softAssert.assertEquals(actualSideBarMenuText, expectedSideBarMenuText,
                 "Wrong sidebar menu text");
         softAssert.assertAll();

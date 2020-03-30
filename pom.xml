@@ -43,7 +43,7 @@
         </profile>
 
         <profile>
-            <id>hw2_selenium</id>
+            <id>hw2_selenium_all</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>

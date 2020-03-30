@@ -40,8 +40,8 @@ public class TestBase {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user-icon"))).click();
         wait.until(ExpectedConditions.attributeToBe(By.className("uui-profile-menu"), "class",
                 "dropdown uui-profile-menu open"));
-        driver.findElement(By.id("name")).sendKeys(user);
-        driver.findElement(By.id("password")).sendKeys(pass);
-        driver.findElement(By.id("login-button")).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("name"))).sendKeys(user);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("password"))).sendKeys(pass);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-button"))).click();
     }
 }
