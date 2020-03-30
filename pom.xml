@@ -23,32 +23,12 @@
 
     <profiles>
         <profile>
-            <id>hw2_exercise1</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <suite.xml>src/test/resources/suites_hw2/First_Exercise_suite.xml</suite.xml>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>hw2_exercise2</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <suite.xml>src/test/resources/suites_hw2/Second_Exercise_suite.xml</suite.xml>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>hw2_selenium</id>
+            <id>hw3_all_tests</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.xml>src/test/resources/suites_hw2/All_tests_suite.xml</suite.xml>
+                <suite.xml>src/test/resources/suites_hw3/All_tests_suite.xml</suite.xml>
             </properties>
         </profile>
     </profiles>

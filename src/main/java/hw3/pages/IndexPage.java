@@ -1,9 +1,9 @@
 package hw3.pages;
 
-import hw3.pages.components.Benefits;
-import hw3.pages.components.Frame;
-import hw3.pages.components.HeaderMenu;
-import hw3.pages.components.SideBarMenu;
+import hw3.components.Benefits;
+import hw3.components.Frame;
+import hw3.components.HeaderMenu;
+import hw3.components.SideBarMenu;
 import org.openqa.selenium.WebDriver;
 import java.util.List;
 
@@ -85,7 +85,5 @@ public class IndexPage extends AbstractPage{
         return sideBarMenu.getSidebarElementsCount();
     }
 
-    public void goToDifferentElementsPage(){
-        headerMenu.goToDifferentElementPage();
-    }
+    public void goToDifferentElementsPage(){ headerMenu.goToDifferentElementPage(); }
 }

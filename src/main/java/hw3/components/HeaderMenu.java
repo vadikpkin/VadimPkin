@@ -1,4 +1,4 @@
-package hw3.pages.components;
+package hw3.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -68,5 +68,6 @@ public class HeaderMenu extends AbstractPageComposite{
         serviceDropdown.click();
         wait.until(ExpectedConditions.attributeToBe(By.cssSelector(".m-l8 .dropdown"),"class","dropdown open"));
         driver.findElement(By.linkText("DIFFERENT ELEMENTS")).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("main-content-hg")));
     }
 }

@@ -1,7 +1,7 @@
 package hw3.pages;
 
-import hw3.pages.components.HeaderMenu;
-import hw3.pages.components.SideBarMenu;
+import hw3.components.HeaderMenu;
+import hw3.components.SideBarMenu;
 import org.openqa.selenium.WebDriver;
 
 public abstract class AbstractPage {
