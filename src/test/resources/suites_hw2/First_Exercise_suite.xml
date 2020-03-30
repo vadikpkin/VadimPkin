@@ -2,8 +2,8 @@
 <suite name="Exercise1 test suite">
 
     <test name="Exercise1 test">
-        <classes>
-            <class name="hw2.ex1.Exercise1"></class>
-        </classes>
+        <packages>
+            <package name="hw2.ex1" />
+        </packages>
     </test>
 </suite>
