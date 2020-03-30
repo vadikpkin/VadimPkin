@@ -3,6 +3,7 @@ package hw2.base;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -43,5 +44,17 @@ public class TestBase {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("name"))).sendKeys(user);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("password"))).sendKeys(pass);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-button"))).click();
+    }
+
+    public boolean isUsernameDisplayed(){
+        return getUsernameWebElement().isDisplayed();
+    }
+
+    public String getUsername(){
+        return getUsernameWebElement().getText();
+    }
+
+    private WebElement getUsernameWebElement(){
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user-name")));
     }
 }

@@ -20,9 +20,8 @@ public class Exercise1 extends TestBase {
         //3. Perform login
         login("Roman", "Jdi1234");
         //4. Assert Username is logged
-        WebElement userName = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user-name")));
-        softAssert.assertTrue(userName.isDisplayed());
-        softAssert.assertEquals(userName.getText(), "ROMAN IOVLEV");
+        softAssert.assertTrue(isUsernameDisplayed());
+        softAssert.assertEquals(getUsername(), "ROMAN IOVLEV");
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
         softAssert.assertEquals(driver.findElements(By.cssSelector(".m-l8 > li")).size(), 4,
                 "Wrong number of items in header");

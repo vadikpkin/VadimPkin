@@ -21,9 +21,8 @@ public class Exercise2 extends TestBase {
         //3. Perform login
         login("Roman", "Jdi1234");
         //4. Assert Username is logged
-        WebElement userName = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user-name")));
-        softAssert.assertTrue(userName.isDisplayed());
-        softAssert.assertEquals(userName.getText(), "ROMAN IOVLEV");
+        softAssert.assertTrue(isUsernameDisplayed());
+        softAssert.assertEquals(getUsername(), "ROMAN IOVLEV");
         //5.Open through the header menu Service -> Different Elements Page
         wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Service"))).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Different elements"))).click();
