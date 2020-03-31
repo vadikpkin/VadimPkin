@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Multiplication and division suite">
+
+    <test name="Multiplication test">
+        <classes>
+            <class name="hw1.CalculatorMultiplicationTest"></class>
+        </classes>
+    </test>
+
+    <test name="Division test">
+        <classes>
+            <class name="hw1.CalculatorDivisionTest"></class>
+        </classes>
+    </test>
+
+</suite>
