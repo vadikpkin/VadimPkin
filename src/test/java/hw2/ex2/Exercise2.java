@@ -24,35 +24,35 @@ public class Exercise2 extends TestBase {
         softAssert.assertTrue(isUsernameDisplayed());
         softAssert.assertEquals(getUsername(), "ROMAN IOVLEV");
         //5.Open through the header menu Service -> Different Elements Page
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Service"))).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Different elements"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Service"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Different elements"))).click();
         //6. Select checkboxes "Water", "Wind"
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[normalize-space() = 'Water']"))).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[normalize-space() = 'Wind']"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[normalize-space() = 'Water']"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[normalize-space() = 'Wind']"))).click();
         //7. Select radio "Selen"
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[normalize-space() = 'Selen']"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[normalize-space() = 'Selen']"))).click();
         //8.Select in dropdown "Yellow"
-        WebElement colorsDropdown = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".colors select")));
+        WebElement colorsDropdown = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".colors select")));
         new Select(colorsDropdown).selectByVisibleText("Yellow");
         //9.Assert that
         //    • for each checkbox there is an individual log row and value is corresponded to the status of checkbox
-        WebElement waterCheckboxLog = wait.until(ExpectedConditions.presenceOfElementLocated
+        WebElement waterCheckboxLog = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("//li[contains(text(),'Water: condition changed to true')]")));
         softAssert.assertTrue(waterCheckboxLog.isDisplayed(),"Water checkbox log is not displayed");
 
-        WebElement windCheckboxLog = wait.until(ExpectedConditions.presenceOfElementLocated
+        WebElement windCheckboxLog = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("//li[contains(text(),'Wind: condition changed to true')]")));
         softAssert.assertTrue(waterCheckboxLog.isDisplayed(),"Wind checkbox log is not displayed");
         //    • for radio button there is a log row and value is corresponded to the status of radio button
-        WebElement selenRadioLog = wait.until(ExpectedConditions.presenceOfElementLocated
+        WebElement selenRadioLog = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("//li[contains(text(),'metal: value changed to  Selen')]")));
         softAssert.assertTrue(waterCheckboxLog.isDisplayed(),"Selen radio log is not displayed");
         //    • for dropdown there is a log row and value is corresponded to the selected value
-        WebElement dropdownColorsLog = wait.until(ExpectedConditions.presenceOfElementLocated
+        WebElement dropdownColorsLog = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("//li[contains(text(),'Colors: value changed to Yellow')]")));
         softAssert.assertTrue(waterCheckboxLog.isDisplayed(),"Colors dropdown log is not displayed");
         softAssert.assertAll();
         //12. Close Browser
-        //tearDown() method in AbstractTestBase
+        //tearDown() method in TestBase
     }
 }

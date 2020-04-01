@@ -38,12 +38,12 @@ public class TestBase {
     }
 
     public void login(String user, String pass){
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user-icon"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("user-icon"))).click();
         wait.until(ExpectedConditions.attributeToBe(By.className("uui-profile-menu"), "class",
                 "dropdown uui-profile-menu open"));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("name"))).sendKeys(user);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("password"))).sendKeys(pass);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("login-button"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("name")))).sendKeys(user);
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("password")))).sendKeys(pass);
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("login-button")))).click();
     }
 
     public boolean isUsernameDisplayed(){

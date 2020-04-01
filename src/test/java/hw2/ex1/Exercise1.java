@@ -23,21 +23,22 @@ public class Exercise1 extends TestBase {
         softAssert.assertTrue(isUsernameDisplayed());
         softAssert.assertEquals(getUsername(), "ROMAN IOVLEV");
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
-        softAssert.assertEquals(driver.findElements(By.cssSelector(".m-l8 > li")).size(), 4,
-                "Wrong number of items in header");
+        softAssert.assertEquals(wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".m-l8 > li")))
+                        .size(), 4, "Wrong number of items in header");
         String expectedHeader = "HOME\n" +
                                 "CONTACT FORM\n" +
                                 "SERVICE\n" +
                                 "METALS & COLORS";
-        String actualHeader = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("m-l8"))).getText();
+        String actualHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("m-l8"))).getText();
         softAssert.assertEquals(actualHeader, expectedHeader, "Wrong header");
         //6. Assert that there are 4 images on the Index Page and they are displayed
-        List<WebElement> benefitImages = driver.findElements(By.className("benefit-icon"));
+        List<WebElement> benefitImages = wait
+                .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("benefit-icon")));
         benefitImages.forEach(e -> softAssert.assertTrue(e.isDisplayed()));
         softAssert.assertEquals(benefitImages.size(), 4, "Wrong amount of images");
         //7. Assert that there are 4 texts on the Index Page under icons and they have proper text
-        softAssert.assertEquals(driver.findElements(By.className("benefit-txt")).size(),4,
-                "Wrong amount of benefit texts");
+        softAssert.assertEquals(wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("benefit-txt")))
+                        .size(),4, "Wrong amount of benefit texts");
         String expectedTextUnderIcons = "To include good practices\n" +
                                         "and ideas from successful\n" +
                                         "EPAM project\n" +
@@ -48,19 +49,19 @@ public class Exercise1 extends TestBase {
                                         "(about 20 internal and\n" +
                                         "some external projects),\n" +
                                         "wish to get more…";
-        String actualTextUnderIcons = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("benefits"))).getText();
+        String actualTextUnderIcons = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("benefits"))).getText();
         softAssert.assertEquals(actualTextUnderIcons, expectedTextUnderIcons, "Wrong text under icons");
         //8. Assert that there is the iframe with “Frame Button” exist
-        WebElement iFrame = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("frame")));
+        WebElement iFrame = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("frame")));
         softAssert.assertTrue(iFrame.isDisplayed());
         //9. Switch to the iframe and check that there is “Frame Button” in the iframe
         driver.switchTo().frame("frame");
-        WebElement iFrameButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("button-frame")));
+        WebElement iFrameButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("button-frame")));
         softAssert.assertTrue(iFrameButton.isDisplayed());
         //10. Switch to original window back
         driver.switchTo().defaultContent();
         //11. Assert that there are 5 items in the Left Section are displayed and they have proper text
-        List<WebElement> sideBarMenu = driver.findElements(By.cssSelector(".sidebar-menu > li"));
+        List<WebElement> sideBarMenu = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".sidebar-menu > li")));
         softAssert.assertEquals(sideBarMenu.size(), 5, "Wrong amount of elements on sidebar");
         sideBarMenu.forEach(elem -> softAssert.assertTrue(elem.isDisplayed()));
         String expectedSideBarMenuText = "Home\n" +
@@ -68,13 +69,13 @@ public class Exercise1 extends TestBase {
                                          "Service\n" +
                                          "Metals & Colors\n" +
                                          "Elements packs";
-        String actualSideBarMenuText = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".sidebar-menu")))
+        String actualSideBarMenuText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-menu")))
                 .getText();
         softAssert.assertEquals(actualSideBarMenuText, expectedSideBarMenuText,
                 "Wrong sidebar menu text");
         softAssert.assertAll();
         //12. Close Browser
-        //tearDown() method in AbstractTestBase
+        //tearDown() method in TestBase
     }
 
 }
