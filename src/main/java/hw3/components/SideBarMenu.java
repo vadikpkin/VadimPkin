@@ -3,6 +3,8 @@ package hw3.components;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +18,7 @@ public class SideBarMenu extends AbstractPageComposite {
     }
 
     public boolean isSidebarElementsDisplayed(){
+        wait.until(ExpectedConditions.visibilityOfAllElements(sideBarMenuElements));
         boolean isDisplayed = false;
         for (WebElement element : sideBarMenuElements) {
             isDisplayed = element.isDisplayed();
@@ -28,7 +31,7 @@ public class SideBarMenu extends AbstractPageComposite {
     }
 
     public int getSidebarElementsCount(){
-        return sideBarMenuElements.size();
+        return wait.until(ExpectedConditions.visibilityOfAllElements(sideBarMenuElements)).size();
     }
 
 }

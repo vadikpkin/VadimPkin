@@ -28,35 +28,36 @@ public class HeaderMenu extends AbstractPageComposite{
     List<WebElement> headerMenuElements;
 
     @FindBy(css = ".m-l8 .dropdown")
-    private WebElement serviceDropdown;
+    private WebElement serviceMenu;
 
     public HeaderMenu(WebDriver driver) {
         super(driver);
     }
 
     public void login(String user, String pass){
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user-icon"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(userIcon)).click();
         wait.until(ExpectedConditions.attributeToBe(By.className("uui-profile-menu"), "class",
                 "dropdown uui-profile-menu open"));
-        userNameInputField.sendKeys(user);
-        passwordInputField.sendKeys(pass);
-        submitLoginButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(userNameInputField)).sendKeys(user);
+        wait.until(ExpectedConditions.elementToBeClickable(passwordInputField)).sendKeys(pass);
+        wait.until(ExpectedConditions.elementToBeClickable(submitLoginButton)).click();
     }
 
     public boolean isUserNameDisplayed(){
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("user-name")));
-        return userName.isDisplayed();
+        return wait.until(ExpectedConditions.visibilityOf(userName)).isDisplayed();
     }
 
     public String getUserName(){
-        return userName.getText();
+        return wait.until(ExpectedConditions.visibilityOf(userName)).getText();
     }
 
     public List<String> getHeaderMenuElementsText(){
+        wait.until(ExpectedConditions.visibilityOfAllElements(headerMenuElements));
         return headerMenuElements.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
     public boolean isHeaderMenuItemsDisplayed(){
+        wait.until(ExpectedConditions.visibilityOfAllElements(headerMenuElements));
         boolean isDisplayed = false;
         for (WebElement element : headerMenuElements) {
             isDisplayed = element.isDisplayed();
@@ -65,9 +66,9 @@ public class HeaderMenu extends AbstractPageComposite{
     }
 
     public void goToDifferentElementPage(){
-        serviceDropdown.click();
+        wait.until(ExpectedConditions.visibilityOf(serviceMenu)).click();
         wait.until(ExpectedConditions.attributeToBe(By.cssSelector(".m-l8 .dropdown"),"class","dropdown open"));
-        driver.findElement(By.linkText("DIFFERENT ELEMENTS")).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("main-content-hg")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("DIFFERENT ELEMENTS"))).click();
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("main-content-hg")));
     }
 }

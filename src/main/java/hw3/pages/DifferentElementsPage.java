@@ -1,38 +1,34 @@
 package hw3.pages;
 
-import hw3.components.CheckboxRow;
 import hw3.components.LogSection;
-import hw3.components.RadioRow;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class DifferentElementsPage extends AbstractPage {
 
     private LogSection logSection;
 
-    private CheckboxRow checkboxRow;
-
-    private RadioRow radioRow;
-
+    @FindBy(css = ".colors select")
     private WebElement colorsDropdown;
 
+    @FindBy(className = "label-radio")
+    private List<WebElement> radioElements;
+
+    @FindBy(className = "label-checkbox")
+    private List<WebElement> checkBoxElements;
+
     public DifferentElementsPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
         this.logSection = new LogSection(driver);
-        this.checkboxRow = new CheckboxRow(driver);
-        this.radioRow = new RadioRow(driver);
-    }
-
-    public void setCheckbox(String checkboxName){
-        checkboxRow.setCheckBox(checkboxName);
-    }
-
-    public void setRadioRow(String radioRowName){
-        radioRow.setRadio(radioRowName);
+        PageFactory.initElements(driver, this);
     }
 
     public boolean isCheckboxLogDisplayed(String checkboxName, String status){
@@ -48,9 +44,24 @@ public class DifferentElementsPage extends AbstractPage {
     }
 
     public void setColorDropDown(String color){
-        WebDriverWait wait = new WebDriverWait(driver, 5);
         colorsDropdown = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".colors select")));
         Select select = new Select(colorsDropdown);
         select.selectByVisibleText(color);
+    }
+
+    public void setCheckBox(String checkboxName){
+        wait.until(ExpectedConditions.visibilityOfAllElements(checkBoxElements));
+        for (WebElement checkBoxElement : checkBoxElements) {
+            if(!checkBoxElement.isSelected() & checkBoxElement.getText().equals(checkboxName))
+                checkBoxElement.click();
+        }
+    }
+
+    public void setRadio(String checkboxName){
+        wait.until(ExpectedConditions.visibilityOfAllElements(radioElements));
+        for (WebElement checkBoxElement : radioElements) {
+            if(!checkBoxElement.isSelected() & checkBoxElement.getText().equals(checkboxName))
+                checkBoxElement.click();
+        }
     }
 }

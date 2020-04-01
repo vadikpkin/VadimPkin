@@ -14,6 +14,7 @@ public class IndexPage extends AbstractPage{
     private Frame frame;
 
     public IndexPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
         this.headerMenu = new HeaderMenu(driver);
         this.benefits = new Benefits(driver);

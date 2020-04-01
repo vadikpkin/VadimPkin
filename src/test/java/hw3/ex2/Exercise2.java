@@ -31,11 +31,11 @@ public class Exercise2 extends TestBase {
         String checkBoxOne = "Water";
         String checkBoxTwo = "Wind";
         DifferentElementsPage differentElementsPage = new DifferentElementsPage(driver);
-        differentElementsPage.setCheckbox(checkBoxOne);
-        differentElementsPage.setCheckbox(checkBoxTwo);
+        differentElementsPage.setCheckBox(checkBoxOne);
+        differentElementsPage.setCheckBox(checkBoxTwo);
         //7. Select radio "Selen"
         String radio = "Selen";
-        differentElementsPage.setRadioRow(radio);
+        differentElementsPage.setRadio(radio);
         //8.Select in dropdown "Yellow"
         String color = "Yellow";
         differentElementsPage.setColorDropDown(color);

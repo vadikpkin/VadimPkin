@@ -15,10 +15,10 @@ public class LogSection extends AbstractPageComposite {
 
     public LogSection(WebDriver driver) {
         super(driver);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("info-panel-body-log")));
     }
 
     public boolean isCheckboxLogDisplayed(String checkboxName, String status) {
+        wait.until(ExpectedConditions.visibilityOfAllElements(logs));
         boolean isDisplayed = false;
         for (WebElement log : logs) {
             if (log.getText().contains(checkboxName + ": condition changed to " + status))
@@ -29,6 +29,7 @@ public class LogSection extends AbstractPageComposite {
 
 
     public boolean isRadioLogDisplayed(String radioName) {
+        wait.until(ExpectedConditions.visibilityOfAllElements(logs));
         boolean isDisplayed = false;
         for (WebElement log : logs) {
             if (log.getText().contains("metal: value changed to " + radioName))
@@ -38,6 +39,7 @@ public class LogSection extends AbstractPageComposite {
     }
 
     public boolean isDropdownLogDisplayed(String dropdownValue) {
+        wait.until(ExpectedConditions.visibilityOfAllElements(logs));
         boolean isDisplayed = false;
         for (WebElement log : logs) {
             if (log.getText().contains("Colors: value changed to " + dropdownValue))
