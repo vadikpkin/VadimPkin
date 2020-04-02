@@ -52,12 +52,12 @@ public class HeaderMenu extends AbstractPageComposite{
     }
 
     public List<String> getHeaderMenuElementsText(){
-        wait.until(ExpectedConditions.visibilityOfAllElements(headerMenuElements));
+        waitForHeaderMenuElementsToBeVisible();
         return headerMenuElements.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
     public boolean isHeaderMenuItemsDisplayed(){
-        wait.until(ExpectedConditions.visibilityOfAllElements(headerMenuElements));
+        waitForHeaderMenuElementsToBeVisible();
         boolean isDisplayed = false;
         for (WebElement element : headerMenuElements) {
             isDisplayed = element.isDisplayed();
@@ -69,6 +69,9 @@ public class HeaderMenu extends AbstractPageComposite{
         wait.until(ExpectedConditions.visibilityOf(serviceMenu)).click();
         wait.until(ExpectedConditions.attributeToBe(By.cssSelector(".m-l8 .dropdown"),"class","dropdown open"));
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("DIFFERENT ELEMENTS"))).click();
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("main-content-hg")));
+    }
+
+    private void waitForHeaderMenuElementsToBeVisible(){
+        wait.until(ExpectedConditions.visibilityOfAllElements(headerMenuElements));
     }
 }

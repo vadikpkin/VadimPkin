@@ -1,7 +1,6 @@
 package hw3.pages;
 
 import hw3.components.LogSection;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -43,13 +42,13 @@ public class DifferentElementsPage extends AbstractPage {
         return logSection.isDropdownLogDisplayed(dropdownValue);
     }
 
-    public void setColorDropDown(String color){
-        colorsDropdown = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".colors select")));
+    public void setColorDropDown(String color) {
+        colorsDropdown = wait.until(ExpectedConditions.visibilityOf(colorsDropdown));
         Select select = new Select(colorsDropdown);
         select.selectByVisibleText(color);
     }
 
-    public void setCheckBox(String checkboxName){
+    public void setCheckBox(String checkboxName) {
         wait.until(ExpectedConditions.visibilityOfAllElements(checkBoxElements));
         for (WebElement checkBoxElement : checkBoxElements) {
             if(!checkBoxElement.isSelected() & checkBoxElement.getText().equals(checkboxName))
@@ -57,7 +56,7 @@ public class DifferentElementsPage extends AbstractPage {
         }
     }
 
-    public void setRadio(String checkboxName){
+    public void setRadio(String checkboxName) {
         wait.until(ExpectedConditions.visibilityOfAllElements(radioElements));
         for (WebElement checkBoxElement : radioElements) {
             if(!checkBoxElement.isSelected() & checkBoxElement.getText().equals(checkboxName))
