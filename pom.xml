@@ -12,40 +12,51 @@
         <java.target.version>1.8</java.target.version>
 
         <testng.version>7.1.0</testng.version>
-
+      
         <selenium.version>3.141.59</selenium.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
 
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
 
+        <calculator.version>1.0</calculator.version>
     </properties>
 
     <profiles>
         <profile>
-            <id>hw2_exercise1</id>
+            <id>hw1_all</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <suite.xml>src/test/resources/suites_hw2/First_Exercise_suite.xml</suite.xml>
+                <suite.xml>src/test/resources/TestSuites/All_operations_test_suite.xml</suite.xml>
             </properties>
         </profile>
 
         <profile>
-            <id>hw2_exercise2</id>
+            <id>hw1_addition_and_subtract</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <suite.xml>src/test/resources/suites_hw2/Second_Exercise_suite.xml</suite.xml>
+                <suite.xml>src/test/resources/TestSuites/Addition_and_subtraction_test_suite.xml</suite.xml>
             </properties>
         </profile>
 
         <profile>
+            <id>hw1_multiply_and_division</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml>src/test/resources/TestSuites/Multiplication_and_division_test_suite.xml</suite.xml>
+            </properties>
+        </profile>
+      
+         <profile>
             <id>hw2_selenium_all</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <suite.xml>src/test/resources/suites_hw2/All_tests_suite.xml</suite.xml>
@@ -60,18 +71,27 @@
             <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
+            <groupId>com.epam.tat.module4</groupId>
+            <artifactId>calculator-1.0</artifactId>
+            <version>${calculator.version}</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/test/resources/calculator-1.0.jar</systemPath>
+        </dependency>
+      
+      <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
         </dependency>
+      
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -96,5 +116,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
