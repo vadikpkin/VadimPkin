@@ -29,7 +29,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <suite.xml>src/test/resources/TestSuites/All_operations_test_suite.xml</suite.xml>
+                <suite.xml>src/test/resources/suites_hw1/All_operations_test_suite.xml</suite.xml>
             </properties>
         </profile>
 
@@ -39,7 +39,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <suite.xml>src/test/resources/TestSuites/Addition_and_subtraction_test_suite.xml</suite.xml>
+                <suite.xml>src/test/resources/suites_hw1/Addition_and_subtraction_test_suite.xml</suite.xml>
             </properties>
         </profile>
 
@@ -49,7 +49,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <suite.xml>src/test/resources/TestSuites/Multiplication_and_division_test_suite.xml</suite.xml>
+                <suite.xml>src/test/resources/suites_hw1/Multiplication_and_division_test_suite.xml</suite.xml>
             </properties>
         </profile>
       
