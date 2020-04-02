@@ -67,7 +67,7 @@ public class HeaderMenu extends AbstractPageComposite{
 
     public void goToDifferentElementPage(){
         wait.until(ExpectedConditions.visibilityOf(serviceMenu)).click();
-        wait.until(ExpectedConditions.attributeToBe(By.cssSelector(".m-l8 .dropdown"),"class","dropdown open"));
+        wait.until(ExpectedConditions.attributeToBe(serviceMenu,"class","dropdown open"));
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("DIFFERENT ELEMENTS"))).click();
     }
 
