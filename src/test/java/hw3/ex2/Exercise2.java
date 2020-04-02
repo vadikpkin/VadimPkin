@@ -5,8 +5,8 @@ import hw3.pages.DifferentElementsPage;
 import hw3.pages.IndexPage;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import utils.PropertyReader;
+import static org.testng.Assert.*;
 
 
 public class Exercise2 extends TestBase {
@@ -17,13 +17,12 @@ public class Exercise2 extends TestBase {
         openTestSite();
         IndexPage indexPage = new IndexPage(driver);
         //2. Assert Browser title
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(indexPage.getBrowserTitle(), "Home Page");
+        assertEquals(indexPage.getBrowserTitle(), "Home Page");
         //3. Perform login
         indexPage.login(PropertyReader.read("user"), PropertyReader.read("password"));
         //4. Assert Username is logged
-        softAssert.assertTrue(indexPage.isUserNameDisplayed());
-        softAssert.assertEquals(indexPage.getUserName(), "ROMAN IOVLEV");
+        assertTrue(indexPage.isUserNameDisplayed());
+        assertEquals(indexPage.getUserName(), "ROMAN IOVLEV");
         //5.Open through the header menu Service -> Different Elements Page
         WebDriverWait wait = new WebDriverWait(driver, 5);
         indexPage.goToDifferentElementsPage();
@@ -41,12 +40,11 @@ public class Exercise2 extends TestBase {
         differentElementsPage.setColorDropDown(color);
         //9.Assert that
         //    • for each checkbox there is an individual log row and value is corresponded to the status of checkbox
-        softAssert.assertTrue(differentElementsPage.isCheckboxLogDisplayed(checkBoxOne, "true"));
-        softAssert.assertTrue(differentElementsPage.isCheckboxLogDisplayed(checkBoxTwo, "true"));
+        assertTrue(differentElementsPage.isCheckboxLogDisplayed(checkBoxOne, "true"));
+        assertTrue(differentElementsPage.isCheckboxLogDisplayed(checkBoxTwo, "true"));
         //    • for radio button there is a log row and value is corresponded to the status of radio button
-        softAssert.assertTrue(differentElementsPage.isRadioLogDisplayed(radio));
+        assertTrue(differentElementsPage.isRadioLogDisplayed(radio));
         //    • for dropdown there is a log row and value is corresponded to the selected value
-        softAssert.assertTrue(differentElementsPage.isDropdownLogDisplayed(color));
-        softAssert.assertAll();
+        assertTrue(differentElementsPage.isDropdownLogDisplayed(color));
     }
 }

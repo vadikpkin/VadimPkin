@@ -10,10 +10,10 @@ import java.util.stream.Collectors;
 public class Benefits extends AbstractPageComposite{
 
     @FindBy(className = "benefit-icon")
-    List<WebElement> benefitImages;
+    private List<WebElement> benefitImages;
 
     @FindBy(className = "benefit-txt")
-    List<WebElement> benefitTexts;
+    private List<WebElement> benefitTexts;
 
     public Benefits(WebDriver driver) {
         super(driver);
