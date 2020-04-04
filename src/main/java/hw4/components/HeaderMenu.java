@@ -1,5 +1,6 @@
 package hw4.components;
 
+import hw4.data.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,12 +36,12 @@ public class HeaderMenu extends AbstractPageComposite{
         super(driver);
     }
 
-    public void login(String user, String pass){
+    public void login(User user){
         wait.until(ExpectedConditions.elementToBeClickable(userIcon)).click();
         wait.until(ExpectedConditions.attributeToBe(By.className("uui-profile-menu"), "class",
                 "dropdown uui-profile-menu open"));
-        wait.until(ExpectedConditions.elementToBeClickable(userNameInputField)).sendKeys(user);
-        wait.until(ExpectedConditions.elementToBeClickable(passwordInputField)).sendKeys(pass);
+        wait.until(ExpectedConditions.elementToBeClickable(userNameInputField)).sendKeys(user.getUserName());
+        wait.until(ExpectedConditions.elementToBeClickable(passwordInputField)).sendKeys(user.getPassword());
         wait.until(ExpectedConditions.elementToBeClickable(submitLoginButton)).click();
     }
 
@@ -72,7 +73,13 @@ public class HeaderMenu extends AbstractPageComposite{
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("TABLE WITH PAGES"))).click();
     }
 
+    public void goToMetalColorPage(){
+        wait.until(ExpectedConditions.visibilityOf(serviceMenu)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("METALS & COLORS"))).click();
+    }
+
     private void waitForHeaderMenuElementsToBeVisible(){
         wait.until(ExpectedConditions.visibilityOfAllElements(headerMenuElements));
     }
+
 }

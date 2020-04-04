@@ -1,8 +1,8 @@
 package hw4.TestBase;
 
+import hw4.util.WebDriverSingleton;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -15,14 +15,13 @@ public class TestBase {
     @BeforeMethod
     public void setUp() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        WebDriverSingleton.INSTANCE.setDriver("chrome");
+        driver = WebDriverSingleton.INSTANCE.getDriver();
     }
 
     @AfterMethod
     public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+        driver.quit();
     }
 
     public void openTestSite() {
