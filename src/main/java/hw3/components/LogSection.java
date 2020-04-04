@@ -19,8 +19,9 @@ public class LogSection extends AbstractPageComposite {
         waitForLogsToBeVisible();
         boolean isDisplayed = false;
         for (WebElement log : logs) {
-            if (log.getText().contains(checkboxName + ": condition changed to " + status))
+            if (log.getText().contains(checkboxName + ": condition changed to " + status)) {
                 isDisplayed = true;
+            }
         }
         return isDisplayed;
     }
@@ -30,8 +31,9 @@ public class LogSection extends AbstractPageComposite {
         waitForLogsToBeVisible();
         boolean isDisplayed = false;
         for (WebElement log : logs) {
-            if (log.getText().contains("metal: value changed to " + radioName))
+            if (log.getText().contains("metal: value changed to " + radioName)) {
                 isDisplayed = true;
+            }
         }
         return isDisplayed;
     }
@@ -40,8 +42,9 @@ public class LogSection extends AbstractPageComposite {
         waitForLogsToBeVisible();
         boolean isDisplayed = false;
         for (WebElement log : logs) {
-            if (log.getText().contains("Colors: value changed to " + dropdownValue))
+            if (log.getText().contains("Colors: value changed to " + dropdownValue)) {
                 isDisplayed = true;
+            }
         }
         return isDisplayed;
     }

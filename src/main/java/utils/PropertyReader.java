@@ -7,9 +7,11 @@ import java.util.Properties;
 
 public class PropertyReader {
 
+    private static final String PATH = "src/test/resources/properties/hw3_test_data.properties";
+
     public static String read(String property) {
 
-        try (InputStream input = new FileInputStream("src/test/resources/properties/hw3_test_data.properties")) {
+        try (InputStream input = new FileInputStream(PATH)) {
 
             Properties prop = new Properties();
 

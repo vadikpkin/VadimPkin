@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class Frame extends AbstractPageComposite {
+public class ButtonFrame extends AbstractPageComposite {
 
     @FindBy(id = "frame")
     private WebElement frame;
@@ -13,7 +13,7 @@ public class Frame extends AbstractPageComposite {
     @FindBy(id = "button-frame")
     private WebElement button;
 
-    public Frame(WebDriver driver) {
+    public ButtonFrame(WebDriver driver) {
         super(driver);
     }
 

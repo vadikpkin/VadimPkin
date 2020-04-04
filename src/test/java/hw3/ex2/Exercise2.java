@@ -47,4 +47,5 @@ public class Exercise2 extends TestBase {
         //    • for dropdown there is a log row and value is corresponded to the selected value
         assertTrue(differentElementsPage.isDropdownLogDisplayed(color));
     }
+
 }

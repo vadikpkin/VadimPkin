@@ -1,7 +1,7 @@
 package hw3.pages;
 
 import hw3.components.Benefits;
-import hw3.components.Frame;
+import hw3.components.ButtonFrame;
 import hw3.components.HeaderMenu;
 import hw3.components.SideBarMenu;
 import org.openqa.selenium.WebDriver;
@@ -11,14 +11,14 @@ public class IndexPage extends AbstractPage{
 
     private Benefits benefits;
 
-    private Frame frame;
+    private ButtonFrame buttonFrame;
 
     public IndexPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
         this.headerMenu = new HeaderMenu(driver);
         this.benefits = new Benefits(driver);
-        this.frame = new Frame(driver);
+        this.buttonFrame = new ButtonFrame(driver);
         this.sideBarMenu = new SideBarMenu(driver);
     }
 
@@ -61,19 +61,19 @@ public class IndexPage extends AbstractPage{
     }
 
     public boolean isFrameDisplayed(){
-        return frame.isFrameDisplayed();
+        return buttonFrame.isFrameDisplayed();
     }
 
     public boolean isFrameButtonDisplayed(){
-        return frame.isButtonDisplayed();
+        return buttonFrame.isButtonDisplayed();
     }
 
     public void switchToFrame(){
-        frame.switchToFrame();
+        buttonFrame.switchToFrame();
     }
 
     public void switchToDefault(){
-        frame.switchToDefaultWindow();
+        buttonFrame.switchToDefaultWindow();
     }
 
     public boolean isSidebarElementsDisplayed(){
