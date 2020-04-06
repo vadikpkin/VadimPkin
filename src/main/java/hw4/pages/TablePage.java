@@ -24,21 +24,21 @@ public class TablePage extends AbstractPage {
         PageFactory.initElements(driver, this);
     }
 
-    public String getDropdownValue(){
+    public String getDropdownValue() {
         wait.until(ExpectedConditions.visibilityOf(showDropdown));
         return new Select(showDropdown).getFirstSelectedOption().getText();
     }
 
-    public void setDropdownValue(String value){
+    public void setDropdownValue(String value) {
         wait.until(ExpectedConditions.elementToBeClickable(showDropdown));
         new Select(showDropdown).selectByValue(value);
     }
 
-    public int getTableRowsCount(){
+    public int getTableRowsCount() {
         return wait.until(ExpectedConditions.visibilityOfAllElements(tableRows)).size();
     }
 
-    public void searchFor(String search){
+    public void searchFor(String search) {
         wait.until(ExpectedConditions.visibilityOf(searchField)).sendKeys(search);
     }
 

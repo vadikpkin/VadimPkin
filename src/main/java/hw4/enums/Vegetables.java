@@ -1,12 +1,12 @@
-package hw4.components;
+package hw4.enums;
 
 public enum Vegetables {
+
+    VEGETABLES,
 
     CUCUMBER,
 
     TOMATO,
-
-    VEGETABLES,
 
     ONION;
 

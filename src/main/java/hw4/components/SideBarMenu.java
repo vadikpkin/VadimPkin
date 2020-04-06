@@ -17,7 +17,7 @@ public class SideBarMenu extends AbstractPageComposite {
         super(driver);
     }
 
-    public boolean isSidebarElementsDisplayed(){
+    public boolean isSidebarElementsDisplayed() {
         waitForSidebarMenuToBeVisible();
         boolean isDisplayed = false;
         for (WebElement element : sideBarMenuElements) {
@@ -26,16 +26,16 @@ public class SideBarMenu extends AbstractPageComposite {
         return isDisplayed;
     }
 
-    public List<String> getSideBarMenuElementsText(){
+    public List<String> getSideBarMenuElementsText() {
         waitForSidebarMenuToBeVisible();
         return sideBarMenuElements.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    public int getSidebarElementsCount(){
+    public int getSidebarElementsCount() {
         return wait.until(ExpectedConditions.visibilityOfAllElements(sideBarMenuElements)).size();
     }
 
-    private void waitForSidebarMenuToBeVisible(){
+    private void waitForSidebarMenuToBeVisible() {
         wait.until(ExpectedConditions.visibilityOfAllElements(sideBarMenuElements));
     }
 

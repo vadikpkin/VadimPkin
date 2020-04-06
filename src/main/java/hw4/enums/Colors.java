@@ -1,6 +1,8 @@
-package hw4.components;
+package hw4.enums;
 
 public enum Colors {
+
+    COLORS,
 
     RED,
 

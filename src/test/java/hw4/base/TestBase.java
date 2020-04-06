@@ -1,6 +1,6 @@
-package hw4.TestBase;
+package hw4.base;
 
-import hw4.util.WebDriverSingleton;
+import hw4.utils.WebDriverSingleton;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -19,7 +19,7 @@ public class TestBase {
         driver = WebDriverSingleton.INSTANCE.getDriver();
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         driver.quit();
     }

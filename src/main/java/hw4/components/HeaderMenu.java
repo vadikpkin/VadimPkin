@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class HeaderMenu extends AbstractPageComposite{
+public class HeaderMenu extends AbstractPageComposite {
     @FindBy(id = "user-icon")
     private WebElement userIcon;
 
@@ -36,7 +36,7 @@ public class HeaderMenu extends AbstractPageComposite{
         super(driver);
     }
 
-    public void login(User user){
+    public void login(User user) {
         wait.until(ExpectedConditions.elementToBeClickable(userIcon)).click();
         wait.until(ExpectedConditions.attributeToBe(By.className("uui-profile-menu"), "class",
                 "dropdown uui-profile-menu open"));
@@ -45,20 +45,20 @@ public class HeaderMenu extends AbstractPageComposite{
         wait.until(ExpectedConditions.elementToBeClickable(submitLoginButton)).click();
     }
 
-    public boolean isUserNameDisplayed(){
+    public boolean isUserNameDisplayed() {
         return wait.until(ExpectedConditions.visibilityOf(userName)).isDisplayed();
     }
 
-    public String getUserName(){
+    public String getUserName() {
         return wait.until(ExpectedConditions.visibilityOf(userName)).getText();
     }
 
-    public List<String> getHeaderMenuElementsText(){
+    public List<String> getHeaderMenuElementsText() {
         waitForHeaderMenuElementsToBeVisible();
         return headerMenuElements.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    public boolean isHeaderMenuItemsDisplayed(){
+    public boolean isHeaderMenuItemsDisplayed() {
         waitForHeaderMenuElementsToBeVisible();
         boolean isDisplayed = false;
         for (WebElement element : headerMenuElements) {
@@ -67,18 +67,17 @@ public class HeaderMenu extends AbstractPageComposite{
         return isDisplayed;
     }
 
-    public void goToTableWithPagesPage(){
+    public void goToTableWithPagesPage() {
         wait.until(ExpectedConditions.visibilityOf(serviceMenu)).click();
-        wait.until(ExpectedConditions.attributeToBe(serviceMenu,"class","dropdown open"));
+        wait.until(ExpectedConditions.attributeToBe(serviceMenu, "class", "dropdown open"));
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("TABLE WITH PAGES"))).click();
     }
 
-    public void goToMetalColorPage(){
-        wait.until(ExpectedConditions.visibilityOf(serviceMenu)).click();
+    public void goToMetalColorPage() {
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("METALS & COLORS"))).click();
     }
 
-    private void waitForHeaderMenuElementsToBeVisible(){
+    private void waitForHeaderMenuElementsToBeVisible() {
         wait.until(ExpectedConditions.visibilityOfAllElements(headerMenuElements));
     }
 

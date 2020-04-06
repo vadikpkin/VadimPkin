@@ -1,4 +1,4 @@
-package hw4.util;
+package hw4.utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
