@@ -1,6 +1,5 @@
 package hw4.data;
 
-import hw4.data.FormData;
 import hw4.enums.Colors;
 import hw4.enums.Metals;
 import hw4.enums.Vegetables;

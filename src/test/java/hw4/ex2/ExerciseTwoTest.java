@@ -59,7 +59,6 @@ public class ExerciseTwoTest extends TestBase {
     public void metalsColorsPageFuncTest(FormData form) {
         //1. Open test site by URL
         openTestSite();
-
         assertThat(indexPage.getBrowserTitle()).isEqualTo("Home Page");
 
         //2. Perform login
@@ -85,8 +84,8 @@ public class ExerciseTwoTest extends TestBase {
         if (!form.getVegetablesAsString().equalsIgnoreCase(Vegetables.VEGETABLES.toString())) {
             assertThat(metalsColorsPage.getVegetableResult()).isEqualToIgnoringCase(form.getVegetablesAsString());
         }
-        String expectedSum = CalculationUtils.summ(form.getEven(), form.getOdd());
         if (!form.getEven().equals("2") | !form.getOdd().equals("1")) {
+            String expectedSum = CalculationUtils.summ(form.getEven(), form.getOdd());
             assertThat(metalsColorsPage.getSumResult()).isEqualTo(expectedSum);
         }
     }
