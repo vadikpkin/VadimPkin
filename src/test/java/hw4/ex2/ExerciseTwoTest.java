@@ -78,7 +78,7 @@ public class ExerciseTwoTest extends TestBase {
         if (!form.getMetals().equalsIgnoreCase(Metals.METALS.toString())) {
             assertThat(metalsColorsPage.getMetalResult()).isEqualToIgnoringCase(form.getMetals());
         }
-        if (form.getElements() != null) {
+        if (!form.getElementsAsString().equalsIgnoreCase(Elements.DEFAULT.toString())) {
             assertThat(metalsColorsPage.getElementsResult()).isEqualToIgnoringCase(form.getElementsAsString());
         }
         if (!form.getVegetablesAsString().equalsIgnoreCase(Vegetables.VEGETABLES.toString())) {

@@ -1,5 +1,7 @@
 package hw4.components;
 
+import hw4.enums.Elements;
+import hw4.enums.Metals;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -46,7 +48,7 @@ public class Result extends AbstractPageComposite {
         try {
             return getElementText(elementsResult);
         } catch (TimeoutException e) {
-            return null;
+            return Elements.DEFAULT.toString();
         }
     }
 

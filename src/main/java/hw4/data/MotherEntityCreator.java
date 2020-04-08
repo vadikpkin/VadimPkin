@@ -1,6 +1,7 @@
 package hw4.data;
 
 import hw4.enums.Colors;
+import hw4.enums.Elements;
 import hw4.enums.Metals;
 import hw4.enums.Vegetables;
 import java.util.Arrays;
@@ -13,6 +14,7 @@ public class MotherEntityCreator {
                 .setOdd("1")
                 .setColors(Colors.COLORS)
                 .setVegetables(Arrays.asList(Vegetables.VEGETABLES))
-                .setMetals(Metals.METALS);
+                .setMetals(Metals.METALS)
+                .setElements(Arrays.asList(Elements.DEFAULT));
     }
 }

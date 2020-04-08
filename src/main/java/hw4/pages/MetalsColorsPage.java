@@ -88,11 +88,7 @@ public class MetalsColorsPage extends AbstractPage {
             // to uncheck vegetables checkbox, because by default it is checked
             driver.findElement(By.xpath("//*[@id='vegetables']//label[text()='Vegetables']")).click();
             for (Vegetables vegetableToSet : vegetable) {
-                for (WebElement vegetablesDropdownElement : vegetablesDropdownElements) {
-                    if (vegetablesDropdownElement.getText().equalsIgnoreCase(vegetableToSet.toString())) {
-                        vegetablesDropdownElement.click();
-                    }
-                }
+                clickElement(vegetablesDropdownElements, vegetableToSet.toString());
             }
         }
     }
@@ -101,11 +97,7 @@ public class MetalsColorsPage extends AbstractPage {
         if (element != null) {
             wait.until(ExpectedConditions.visibilityOfAllElements(elements));
             for (Elements elemToSet : element) {
-                for (WebElement webElement : elements) {
-                    if (webElement.getText().equalsIgnoreCase(elemToSet.toString())) {
-                        webElement.click();
-                    }
-                }
+                clickElement(elements, elemToSet.toString());
             }
         }
     }
@@ -121,11 +113,7 @@ public class MetalsColorsPage extends AbstractPage {
     private void setNumber(String value, List<WebElement> whereToSet) {
         if (!value.equals("2") | !value.equals("1")) {
             wait.until(ExpectedConditions.visibilityOfAllElements(whereToSet));
-            for (WebElement webElement : whereToSet) {
-                if (webElement.getText().equalsIgnoreCase(value)) {
-                    webElement.click();
-                }
-            }
+            clickElement(whereToSet, value);
         }
     }
 
@@ -133,9 +121,13 @@ public class MetalsColorsPage extends AbstractPage {
         wait.until(ExpectedConditions.elementToBeClickable(elemToSet)).click();
         wait.until(ExpectedConditions
                 .attributeToBe(elemTocCheck, "class", "btn-group bootstrap-select uui-form-element open"));
-        for (WebElement colorsDropdownElement : whatWaitToAppear) {
-            if (colorsDropdownElement.getText().equalsIgnoreCase(valueToSet)) {
-                colorsDropdownElement.click();
+        clickElement(whatWaitToAppear, valueToSet);
+    }
+
+    private void clickElement(List<WebElement> whereToSet, String value){
+        for (WebElement element : whereToSet) {
+            if (element.getText().equalsIgnoreCase(value.toString())) {
+                element.click();
             }
         }
     }
