@@ -2,30 +2,25 @@ package hw5.base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import hw5.utils.WebDriverSingleton;
 
 public class TestBase {
 
     protected WebDriver driver;
 
-    protected final static String URL = "https://jdi-testing.github.io/jdi-light/index.html";
-
     @BeforeMethod
     public void setUp() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        WebDriverSingleton.INSTANCE.createdDriver("chrome");
+        driver = WebDriverSingleton.INSTANCE.getDriver();
+        driver.manage().window().maximize();
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         driver.quit();
-    }
-
-    public void openTestSite(){
-        driver.get(URL);
-        driver.manage().window().maximize();
     }
 
 }
