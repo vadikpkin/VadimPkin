@@ -49,17 +49,17 @@ public class DifferentElementsPage extends AbstractPage {
     }
 
     public void setCheckBox(String checkboxName) {
-        wait.until(ExpectedConditions.visibilityOfAllElements(checkBoxElements));
-        for (WebElement checkBoxElement : checkBoxElements) {
-            if(!checkBoxElement.isSelected() & checkBoxElement.getText().equals(checkboxName))
-                checkBoxElement.click();
-        }
+        clickElement(checkboxName, checkBoxElements);
     }
 
-    public void setRadio(String checkboxName) {
-        wait.until(ExpectedConditions.visibilityOfAllElements(radioElements));
-        for (WebElement checkBoxElement : radioElements) {
-            if(!checkBoxElement.isSelected() & checkBoxElement.getText().equals(checkboxName))
+    public void setRadio(String radioName) {
+        clickElement(radioName, radioElements);
+    }
+
+    private void clickElement(String name, List<WebElement> whereToClick){
+        wait.until(ExpectedConditions.visibilityOfAllElements(whereToClick));
+        for (WebElement checkBoxElement : whereToClick) {
+            if(!checkBoxElement.isSelected() & checkBoxElement.getText().equals(name))
                 checkBoxElement.click();
         }
     }

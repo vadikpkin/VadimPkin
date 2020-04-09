@@ -23,7 +23,7 @@ public class PropertyReader {
             ex.printStackTrace();
         }
 
-        return null;
+        throw new RuntimeException("Property reading failed");
     }
 
 }

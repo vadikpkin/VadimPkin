@@ -12,3 +12,8 @@ log/
 target/
 
 .jar
+
+#Allure
+**/allure-results
+**/.allure
+**/allure-report
