@@ -80,7 +80,7 @@
         <profile>
             <id>hw5_all_tests</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <suite.xml>src/test/resources/suites_hw5/All_test_suite.xml</suite.xml>
