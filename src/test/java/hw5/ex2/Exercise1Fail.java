@@ -1,4 +1,4 @@
-package hw5.ex1;
+package hw5.ex2;
 
 import hw5.base.TestBase;
 import hw5.steps.IndexPageSteps;
@@ -7,10 +7,11 @@ import io.qameta.allure.Story;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.PropertyReader;
+
 import java.util.Arrays;
 
 @Feature("Index page functionality")
-public class Exercise1 extends TestBase {
+public class Exercise1Fail extends TestBase {
 
     private IndexPageSteps indexPageSteps;
 
@@ -39,7 +40,7 @@ public class Exercise1 extends TestBase {
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
 
         indexPageSteps.headerMenuShouldBeDisplayed();
-        indexPageSteps.headerMenuShouldBe(Arrays.asList("HOME","CONTACT FORM","SERVICE","METALS & COLORS"));
+        indexPageSteps.headerMenuShouldBe(Arrays.asList("HOME","CONTACT ","SERVICE","METALS & COLORS"));
         //6. Assert that there are 4 images on the Index Page and they are displayed
 
         indexPageSteps.amountOfImagesShouldBe(4);

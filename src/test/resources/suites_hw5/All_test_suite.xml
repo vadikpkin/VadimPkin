@@ -9,6 +9,7 @@
     <test name="all_tests">
         <packages>
             <package name="hw5.ex1" />
+            <package name="hw5.ex2" />
         </packages>
     </test>
 </suite>

@@ -120,4 +120,8 @@ public class IndexPageSteps {
         assertTrue(indexPage.isSidebarElementsDisplayed());
     }
 
+    @Step("Open through the header menu Service -> Different Elements Page")
+    public void goToDifferentElementsPage() {
+        indexPage.goToDifferentElementsPage();
+    }
 }
