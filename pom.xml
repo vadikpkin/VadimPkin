@@ -21,7 +21,7 @@
         <allure-maven-plugin.version>2.10.0</allure-maven-plugin.version>
 
         <allure.version>2.13.2</allure.version>
-        <aspectj.version>1.9.4</aspectj.version>
+        <aspectj.version>1.9.5</aspectj.version>
 
         <calculator.version>1.0</calculator.version>
     </properties>
@@ -123,6 +123,7 @@
             <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
         </dependency>
+
     </dependencies>
 
     <build>
