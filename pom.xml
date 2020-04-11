@@ -13,7 +13,7 @@
 
         <testng.version>7.1.0</testng.version>
         <assertj.version>3.15.0</assertj.version>
-      
+
         <selenium.version>3.141.59</selenium.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
 
@@ -63,17 +63,26 @@
                 <suite.xml>src/test/resources/suites_hw2/All_tests_suite.xml</suite.xml>
             </properties>
         </profile>
+       
+      <profile>
+            <id>hw3_all_tests</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml>src/test/resources/suites_hw3/All_tests_suite.xml</suite.xml>
+            </properties>
+     </profile>
 
         <profile>
             <id>hw4_all</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
-            <properties>
-                <suite.xml>src/test/resources/hw4/suites/hw4_all_test.xml</suite.xml>
+                 <suite.xml>src/test/resources/hw4/suites/hw4_all_test.xml</suite.xml>
             </properties>
         </profile>
-
+       
     </profiles>
 
     <dependencies>
