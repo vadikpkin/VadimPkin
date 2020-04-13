@@ -53,8 +53,8 @@
                 <suite.xml>src/test/resources/suites_hw1/Multiplication_and_division_test_suite.xml</suite.xml>
             </properties>
         </profile>
-      
-         <profile>
+
+        <profile>
             <id>hw2_selenium_all</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
@@ -63,8 +63,8 @@
                 <suite.xml>src/test/resources/suites_hw2/All_tests_suite.xml</suite.xml>
             </properties>
         </profile>
-       
-      <profile>
+
+        <profile>
             <id>hw3_all_tests</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
@@ -72,17 +72,18 @@
             <properties>
                 <suite.xml>src/test/resources/suites_hw3/All_tests_suite.xml</suite.xml>
             </properties>
-     </profile>
+        </profile>
 
         <profile>
             <id>hw4_all</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
-                 <suite.xml>src/test/resources/hw4/suites/hw4_all_test.xml</suite.xml>
+            <properties>
+                <suite.xml>src/test/resources/suites_hw4/hw4_all_test.xml</suite.xml>
             </properties>
         </profile>
-       
+
     </profiles>
 
     <dependencies>
