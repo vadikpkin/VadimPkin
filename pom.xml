@@ -13,6 +13,7 @@
 
         <testng.version>7.1.0</testng.version>
         <assertj.version>3.15.0</assertj.version>
+        <cucumber.version>5.6.0</cucumber.version>
 
         <selenium.version>3.141.59</selenium.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
@@ -79,7 +80,18 @@
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
-                 <suite.xml>src/test/resources/hw4/suites/hw4_all_test.xml</suite.xml>
+            <properties>
+                 <suite.xml>src/test/resources/suites_hw4/hw4_all_test.xml</suite.xml>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>hw6_all</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml>src/test/resources/suites_hw6/all_cucumber_tests.xml</suite.xml>
             </properties>
         </profile>
        
@@ -120,6 +132,27 @@
             <version>${webdrivermanager.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>5.6.0</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -49,6 +49,17 @@ public class LogSection extends AbstractPageComposite {
         return isDisplayed;
     }
 
+    public boolean isLogTextDisplayed(String logText) {
+        waitForLogsToBeVisible();
+        boolean isDisplayed = false;
+        for (WebElement log : logs) {
+            if (log.getText().contains(logText)) {
+                isDisplayed = true;
+            }
+        }
+        return isDisplayed;
+    }
+
     private void waitForLogsToBeVisible(){
         wait.until(ExpectedConditions.visibilityOfAllElements(logs));
     }

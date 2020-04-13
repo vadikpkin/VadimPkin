@@ -3,7 +3,8 @@ package hw3.ex2;
 import hw3.base.TestBase;
 import hw3.pages.DifferentElementsPage;
 import hw3.pages.IndexPage;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import hw4.data.User;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.PropertyReader;
 import static org.testng.Assert.*;
@@ -11,25 +12,37 @@ import static org.testng.Assert.*;
 
 public class Exercise2 extends TestBase {
 
+    private IndexPage indexPage;
+    private DifferentElementsPage differentElementsPage;
+    private User user;
+
+    @BeforeMethod
+    public void initData() {
+        indexPage = new IndexPage(driver);
+        differentElementsPage = new DifferentElementsPage(driver);
+        user = User
+                .builder()
+                .setPassword(PropertyReader.read("password"))
+                .setUsername(PropertyReader.read("user"))
+                .build();
+    }
+
     @Test
     public void differentElementPageFunctionalityTest() {
         //1. Open test site by URL
         openTestSite();
-        IndexPage indexPage = new IndexPage(driver);
         //2. Assert Browser title
         assertEquals(indexPage.getBrowserTitle(), "Home Page");
         //3. Perform login
-        indexPage.login(PropertyReader.read("user"), PropertyReader.read("password"));
+        indexPage.login(user);
         //4. Assert Username is logged
         assertTrue(indexPage.isUserNameDisplayed());
         assertEquals(indexPage.getUserName(), "ROMAN IOVLEV");
         //5.Open through the header menu Service -> Different Elements Page
-        WebDriverWait wait = new WebDriverWait(driver, 5);
         indexPage.goToDifferentElementsPage();
         //6. Select checkboxes "Water", "Wind"
         String checkBoxOne = "Water";
         String checkBoxTwo = "Wind";
-        DifferentElementsPage differentElementsPage = new DifferentElementsPage(driver);
         differentElementsPage.setCheckBox(checkBoxOne);
         differentElementsPage.setCheckBox(checkBoxTwo);
         //7. Select radio "Selen"

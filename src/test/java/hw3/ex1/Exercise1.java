@@ -2,6 +2,8 @@ package hw3.ex1;
 
 import hw3.base.TestBase;
 import hw3.pages.IndexPage;
+import hw4.data.User;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import utils.PropertyReader;
@@ -10,16 +12,28 @@ import java.util.List;
 
 public class Exercise1 extends TestBase {
 
+    private IndexPage indexPage;
+    private User user;
+
+    @BeforeMethod
+    public void initData() {
+        indexPage = new IndexPage(driver);
+        user = User
+                .builder()
+                .setPassword(PropertyReader.read("password"))
+                .setUsername(PropertyReader.read("user"))
+                .build();
+    }
+
     @Test
     public void loginTest() {
         //1. Open test site by URL
         openTestSite();
-        IndexPage indexPage = new IndexPage(driver);
         //2. Assert Browser title
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(indexPage.getBrowserTitle(), "Home Page");
         //3. Perform login
-        indexPage.login(PropertyReader.read("user"), PropertyReader.read("password"));
+        indexPage.login(user);
         //4. Assert Username is logged
         softAssert.assertTrue(indexPage.isUserNameDisplayed());
         softAssert.assertEquals(indexPage.getUserName(), "ROMAN IOVLEV");
