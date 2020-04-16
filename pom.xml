@@ -15,6 +15,7 @@
 
         <testng.version>7.1.0</testng.version>
         <assertj.version>3.15.0</assertj.version>
+        <lombok.version>1.18.10</lombok.version>
 
         <selenium.version>3.141.59</selenium.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
@@ -118,18 +119,17 @@
             <scope>system</scope>
             <systemPath>${basedir}/src/test/resources/calculator-1.0.jar</systemPath>
         </dependency>
-      
-      <dependency>
+
+        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
         </dependency>
-      
+
         <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>${webdrivermanager.version}</version>
-            <scope>test</scope>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
     </dependencies>
 
