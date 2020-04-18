@@ -10,7 +10,7 @@ Feature: User page web elements test
     And 6 Description texts under images should be displayed on Users Table on User Table Page
     And 6 checkboxes should be displayed on Users Table on User Table Page
     And User table should contain following values:
-      | Number | User             | Description                       |
+      | numberType | user             | description                       |
       | 1      | Roman            | Wolverine                         |
       | 2      | Sergey Ivan      | Spider Man                        |
       | 3      | Vladzimir        | Punisher                          |

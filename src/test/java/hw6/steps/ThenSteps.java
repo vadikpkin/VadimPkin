@@ -1,14 +1,15 @@
 package hw6.steps;
 
-import data.UserTableRow;
 import hw3.pages.DifferentElementsPage;
 import hw3.pages.UserTablePage;
-import io.cucumber.datatable.DataTable;
+import hw6.entities.JdiUser;
+import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Then;
-import utils.CalculationUtils;
 import utils.WebDriverSingleton;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.assertEquals;
@@ -19,11 +20,11 @@ public class ThenSteps {
     private DifferentElementsPage differentElementsPage;
     private UserTablePage userTablePage;
 
-    @Then("For each checkboxes {string} and {string} there is an individual log row and value is corresponded to the status of checkbox")
-    public void iAssertCheckboxLogsOnDifferentElementsPage(String checkboxOne, String checkBoxTwo) {
+    @Then("For each checkbox there is an individual log row and value is corresponded to the status of checkbox")
+    public void iAssertCheckboxLogsOnDifferentElementsPage(List<String> checkboxes) {
         differentElementsPage = new DifferentElementsPage(WebDriverSingleton.INSTANCE.getDriver());
-        assertTrue(differentElementsPage.isCheckboxLogDisplayed(checkboxOne, "true"));
-        assertTrue(differentElementsPage.isCheckboxLogDisplayed(checkBoxTwo, "true"));
+        checkboxes = checkboxes.subList(1, checkboxes.size());
+        checkboxes.forEach(e -> assertTrue(differentElementsPage.isCheckboxLogDisplayed(e, "true")));
     }
 
     @Then("For radio button {string} there is a log row and value is corresponded to the status of radio button")
@@ -66,18 +67,30 @@ public class ThenSteps {
         assertTrue(userTablePage.isUsersCheckboxesDisplayed());
     }
 
+    @DataTableType
+    public JdiUser JdiUserEntry(Map<String, String> entry) {
+        return new JdiUser(
+                entry.get("numberType"),
+                entry.get("user"),
+                entry.get("description"));
+    }
+
     @Then("User table should contain following values:")
-    public void iAssertContentOfTableOnUserTablePAge(DataTable dataTable) {
-        List<UserTableRow> actualUserTable = CalculationUtils
-                .convertToUserTableRowList(userTablePage.getUsersIds(), userTablePage.getUsersNames(), userTablePage.getUsersImagesDescriptions());
-        List<UserTableRow> expectedUserTable = CalculationUtils.convertUserDataToList(dataTable);
-        assertThat(actualUserTable).isEqualTo(expectedUserTable);
+    public void iAssertContentOfTableOnUserTablePAge(List<JdiUser> users) {
+        List<JdiUser> actualUserTable = new ArrayList<>();
+        List<String> numbers = userTablePage.getUsersIds();
+        List<String> usernames = userTablePage.getUsersNames();
+        List<String> description = userTablePage.getUsersImagesDescriptions();
+        for (int i = 0; i < numbers.size(); i++) {
+            actualUserTable.add(new JdiUser(numbers.get(i), usernames.get(i), description.get(i)));
+        }
+        assertThat(actualUserTable).isEqualTo(users);
     }
 
     @Then("droplist should contain values in column Type for user Roman")
     public void iAssertRolesOfUser(List<String> args) {
         List<String> actualUserRoles = userTablePage.getUserRoles("Roman");
-        List<String> expectedUserRoles = args.subList(1,args.size());
+        List<String> expectedUserRoles = args.subList(1, args.size());
         assertThat(actualUserRoles).isEqualTo(expectedUserRoles);
     }
 
