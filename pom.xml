@@ -77,8 +77,9 @@
         <profile>
             <id>hw4_all</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
                  <suite.xml>src/test/resources/hw4/suites/hw4_all_test.xml</suite.xml>
             </properties>
         </profile>
