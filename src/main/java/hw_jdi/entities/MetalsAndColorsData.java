@@ -10,7 +10,8 @@ import lombok.*;
 public class MetalsAndColorsData {
     private int[] summary;
     private String color;
-    private String metals;
-    private String[] vegetables;
-    private String[] elements;
+    private String metal;
+    private String[] vegetable;
+    private String[] element;
+
 }
