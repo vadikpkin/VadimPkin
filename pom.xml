@@ -18,7 +18,7 @@
         <lombok.version>1.18.10</lombok.version>
 
         <selenium.version>3.141.59</selenium.version>
-        <jdi.version>1.2.0</jdi.version>
+        <jdi.version>1.2.2</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson.version>1.9.13</jackson.version>
 
@@ -124,12 +124,6 @@
             <version>${calculator.version}</version>
             <scope>system</scope>
             <systemPath>${basedir}/src/test/resources/calculator-1.0.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>${selenium.version}</version>
         </dependency>
 
         <dependency>

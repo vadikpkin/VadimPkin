@@ -25,9 +25,9 @@ public class HomePage extends WebPage {
         return usersFullName.getValue();
     }
 
-    public void login() {
+    public void login(User user) {
         userIcon.click();
-        loginForm.login(new User("Roman", "Jdi1234", "ROMAN IOVLEV"));
+        loginForm.login(user);
     }
 
 }
