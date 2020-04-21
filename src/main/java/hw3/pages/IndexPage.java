@@ -4,6 +4,7 @@ import hw3.components.Benefits;
 import hw3.components.ButtonFrame;
 import hw3.components.HeaderMenu;
 import hw3.components.SideBarMenu;
+import hw4.data.User;
 import org.openqa.selenium.WebDriver;
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class IndexPage extends AbstractPage{
         this.sideBarMenu = new SideBarMenu(driver);
     }
 
-    public void login(String username, String password){
-        headerMenu.login(username, password);
+    public void login(User user){
+        headerMenu.login(user);
     }
 
     public boolean isUserNameDisplayed(){
@@ -87,4 +88,6 @@ public class IndexPage extends AbstractPage{
     }
 
     public void goToDifferentElementsPage(){ headerMenu.goToDifferentElementPage(); }
+
+    public void goToUserTablePage(){ headerMenu.goToUserTablePage(); }
 }

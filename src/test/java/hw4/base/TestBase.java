@@ -1,6 +1,6 @@
 package hw4.base;
 
-import hw4.utils.WebDriverSingleton;
+import utils.WebDriverSingleton;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;

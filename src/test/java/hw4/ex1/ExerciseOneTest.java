@@ -4,7 +4,7 @@ import hw4.base.TestBase;
 import hw4.data.User;
 import hw4.pages.IndexPage;
 import hw4.pages.TablePage;
-import hw4.utils.PropertyReader;
+import utils.PropertyReader;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

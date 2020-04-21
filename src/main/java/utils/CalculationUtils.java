@@ -1,4 +1,4 @@
-package hw4.utils;
+package utils;
 
 public final class CalculationUtils {
 
@@ -8,4 +8,5 @@ public final class CalculationUtils {
     public static String summ(String valueOne, String valueTwo) {
         return String.valueOf(Integer.parseInt(valueOne) + Integer.parseInt(valueTwo));
     }
+
 }
