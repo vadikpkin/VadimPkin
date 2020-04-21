@@ -17,3 +17,5 @@ target/
 **/allure-results
 **/.allure
 **/allure-report
+
+.logs/

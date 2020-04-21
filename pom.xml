@@ -12,6 +12,7 @@
         <java.target.version>1.8</java.target.version>
 
         <testng.version>7.1.0</testng.version>
+        <assertj.version>3.15.0</assertj.version>
 
         <selenium.version>3.141.59</selenium.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
@@ -56,8 +57,8 @@
                 <suite.xml>src/test/resources/suites_hw1/Multiplication_and_division_test_suite.xml</suite.xml>
             </properties>
         </profile>
-      
-         <profile>
+
+        <profile>
             <id>hw2_selenium_all</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
@@ -66,7 +67,7 @@
                 <suite.xml>src/test/resources/suites_hw2/All_tests_suite.xml</suite.xml>
             </properties>
         </profile>
-     
+
         <profile>
             <id>hw3_all_tests</id>
             <activation>
@@ -77,8 +78,8 @@
             </properties>
         </profile>
 
-        <profile>
-            <id>hw5_all_tests</id>
+        <profile>          
+            <id>hw5_all_test</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -86,7 +87,16 @@
                 <suite.xml>src/test/resources/suites_hw5/All_test_suite.xml</suite.xml>
             </properties>
         </profile>
-       
+      
+      <profile> 
+       <id>hw4_all</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml>src/test/resources/suites_hw4/hw4_all_test.xml</suite.xml>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>
@@ -94,6 +104,13 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
 
