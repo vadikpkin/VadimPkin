@@ -43,6 +43,7 @@ public class JdiTests {
         JdiSite.homepage.login(User.ROMAN);
         JdiSite.homepage.usersFullName.is().text(User.ROMAN.getFullName());
         JdiSite.homepage.headerMenu.select("Metals & Colors");
+        JdiSite.metalsAndColorsPage.checkOpened();
         JdiSite.metalsAndColorsPage.form.submit(data);
         JdiSite.metalsAndColorsPage.results.has().text(data.getExpectedResult());
     }
