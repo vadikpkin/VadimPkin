@@ -8,8 +8,12 @@
     <artifactId>VadimPkin</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
+
         <java.source.version>1.8</java.source.version>
         <java.target.version>1.8</java.target.version>
 
@@ -18,7 +22,7 @@
         <lombok.version>1.18.10</lombok.version>
 
         <selenium.version>3.141.59</selenium.version>
-        <jdi.version>1.2.2</jdi.version>
+        <jdi.version>1.2.3</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson.version>1.9.13</jackson.version>
 
@@ -82,10 +86,20 @@
         <profile>
             <id>hw4_all</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <suite.xml>src/test/resources/suites_hw4/hw4_all_test.xml</suite.xml>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>hw_jdi</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml>src\test\resources\suites_hw_jdi\all_tests.xml</suite.xml>
             </properties>
         </profile>
 
@@ -160,6 +174,18 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>${project.basedir}/src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
 
     </build>
 </project>

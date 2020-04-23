@@ -2,7 +2,8 @@ package hw_jdi.entities;
 
 import lombok.*;
 
-import java.util.Arrays;
+import static java.lang.String.*;
+import static java.util.Arrays.stream;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,10 +34,19 @@ public class MetalsAndColorsData {
         return getAsString(elements);
     }
 
+    public String getExpectedResult() {
+        return format(
+                        "Summary: %s\n" +
+                        "Elements: %s\n" +
+                        "Color: %s\n" +
+                        "Metal: %s\n" +
+                        "Vegetables: %s",
+                stream(this.summary).sum(), this.getElementsAsString(), this.color, this.metals, this.getVegetablesAsString());
+    }
+
     private String getAsString(String[] elements) {
         StringBuilder stringBuilder = new StringBuilder();
-        Arrays.asList(elements).forEach(e -> stringBuilder.append(e).append(", "));
-        return stringBuilder.substring(0, stringBuilder.lastIndexOf(",")).trim();
+        return String.join(", ", elements);
     }
 
 }

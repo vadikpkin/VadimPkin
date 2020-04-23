@@ -6,19 +6,12 @@ import hw_jdi.entities.MetalsAndColorsData;
 import hw_jdi.entities.User;
 import org.testng.annotations.*;
 import utils.JsonParser;
-import utils.PropertyReader;
 
 import java.util.*;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static java.lang.String.*;
-import static java.util.Arrays.*;
 
 public class JdiTests {
-
-    public static final User ROMAN = new User(PropertyReader.read("user"),
-            PropertyReader.read("password"),
-            PropertyReader.read("fullusername"));
 
     @DataProvider
     public Iterator<Object[]> dataProvider() {
@@ -47,16 +40,10 @@ public class JdiTests {
     public void metalsAndColorPageTest(MetalsAndColorsData data) {
         JdiSite.open();
         JdiSite.homepage.checkOpened();
-        JdiSite.homepage.login(ROMAN);
-        JdiSite.homepage.usersFullName.is().text(ROMAN.getFullName());
+        JdiSite.homepage.login(User.ROMAN);
+        JdiSite.homepage.usersFullName.is().text(User.ROMAN.getFullName());
         JdiSite.homepage.headerMenu.select("Metals & Colors");
-        JdiSite.metalsAndColorsPage.fillForm(data);
-        JdiSite.metalsAndColorsPage.results.has().text(format(
-                "Summary: %s\n" +
-                "Elements: %s\n" +
-                "Color: %s\n" +
-                "Metal: %s\n" +
-                "Vegetables: %s",
-                stream(data.getSummary()).sum(), data.getElementsAsString(), data.getColor(), data.getMetals(), data.getVegetablesAsString()));
+        JdiSite.metalsAndColorsPage.form.submit(data);
+        JdiSite.metalsAndColorsPage.results.has().text(data.getExpectedResult());
     }
 }
