@@ -1,6 +1,7 @@
 package hw5.steps;
 
 import hw3.pages.IndexPage;
+import hw4.data.User;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Listeners;
@@ -34,7 +35,7 @@ public class IndexPageSteps {
 
     @Step("I login as username:'{0}' password:'{1}'")
     public void login(String username, String password) {
-        indexPage.login(username, password);
+        indexPage.login(new User(username, password));
     }
 
     @Step("User name should be displayed")
