@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class PropertyReader {
 
-    private static final String PATH = "src/test/resources/properties/hw3_test_data.properties";
+    private static final String PATH = "src/test/resources/properties/hw4.properties";
 
     public static String read(String property) {
 
