@@ -820,14 +820,11 @@ declare namespace ns1='http://speller.yandex.net/services/spellservice';
 //ns1:s</path><content>${#TestCase#expected_suggestion}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="eaf799f7-8591-42fb-9a1b-6bd94c444eda" name="Lenght assert"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
 declare namespace ns1='http://speller.yandex.net/services/spellservice';
 
-//ns1:error/@len</path><content>${#TestCase#expected_length}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://speller.yandex.net/services/spellservice/checkTexts"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>word_to_correct</con:name><con:value>мОСКВА</con:value></con:property><con:property><con:name>expected_suggestion</con:name><con:value>Москва</con:value></con:property><con:property><con:name>expected_length</con:name><con:value>6</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:testSuite id="e856bfdd-c6b8-4229-afa1-3aed63714125" name="CheckText_method"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="ee11c99a-159d-4890-a29c-c50cb821df0f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Words_duplication_mistake" searchProperties="true"><con:settings/><con:testStep type="groovy" name="init" id="fe61e7c3-5287-49c4-9788-ff032333222a"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
+//ns1:error/@len</path><content>${#TestCase#expected_length}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://speller.yandex.net/services/spellservice/checkTexts"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>word_to_correct</con:name><con:value>мОСКВА</con:value></con:property><con:property><con:name>expected_suggestion</con:name><con:value>Москва</con:value></con:property><con:property><con:name>expected_length</con:name><con:value>6</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:testSuite id="e856bfdd-c6b8-4229-afa1-3aed63714125" name="CheckText_method"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="ee11c99a-159d-4890-a29c-c50cb821df0f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Words_duplication_mistake" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Read_test_data" id="fe61e7c3-5287-49c4-9788-ff032333222a"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
 tcase = project.testSuites["CheckText_method"].testCases["Words_duplication_mistake"] ;
 int iteration = Integer.parseInt(tcase.getPropertyValue("iteration"))
-groovyutils = new com.eviware.soapui.support.GroovyUtils(context)
-String projectpath = groovyutils.projectPath
-
-File file = new File(projectpath + "/resourses/"+tcase.getPropertyValue("input"))
-    def line = file.readLines().get(iteration)
+    String[] lines =tcase.getPropertyValue("text").split(" &amp; ")
+    String line = lines[iteration]
     String[] testData = line.split(", ")
     
     tcase.setPropertyValue("word_to_correct", testData[0])
@@ -858,31 +855,32 @@ for(i=0; i&lt;expected.length;i++){
 a =  i+1;
 String result = new String(holder.getNodeValue("//xmlns:word" + "[" + a + "]"));
 assert result == expected[i]
-}</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="tear" id="370fdb1c-bbce-48a3-af7c-492a0fc1c145"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
+}</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="Postcondition" id="370fdb1c-bbce-48a3-af7c-492a0fc1c145"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
 tcase = project.testSuites["CheckText_method"].testCases["Words_duplication_mistake"] ;
 int iteration = Integer.parseInt(tcase.getPropertyValue("iteration"))
 groovyutils = new com.eviware.soapui.support.GroovyUtils(context)
 String projectpath = groovyutils.projectPath
-
-File file = new File(projectpath + "/resourses/"+tcase.getPropertyValue("input"))
-int linesCount = file.readLines().size
+String[] lines =tcase.getPropertyValue("text").split(" &amp; ")
+int linesCount = lines.length
 if(iteration != linesCount - 1) {
 tcase.setPropertyValue("iteration", String.valueOf(iteration+1))
-testRunner.gotoStepByName("init")
+testRunner.gotoStepByName("Read_test_data")
 }</script></con:config></con:testStep><con:setupScript>project = testRunner.testCase.testSuite.project ;
 tcase = project.testSuites["CheckText_method"].testCases["Words_duplication_mistake"] ;
 
-tcase.setPropertyValue("iteration", String.valueOf(0))</con:setupScript><con:tearDownScript>project = testRunner.testCase.testSuite.project ;
-tcase = project.testSuites["CheckText_method"].testCases["Words_duplication_mistake"] ;
-
-tcase.setPropertyValue("iteration", String.valueOf(0))</con:tearDownScript><con:properties><con:property><con:name>word_to_correct</con:name><con:value>есть есть еду</con:value></con:property><con:property><con:name>expected_length</con:name><con:value>4</con:value></con:property><con:property><con:name>expected_suggestion</con:name><con:value>есть</con:value></con:property><con:property><con:name>input</con:name><con:value>duplication_mistake_test_data.csv</con:value></con:property><con:property><con:name>iteration</con:name><con:value>0</con:value></con:property></con:properties></con:testCase><con:testCase id="48012026-8cf5-43be-bad4-ed37d1519eb9" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Uppercase_mistake" searchProperties="true"><con:settings/><con:testStep type="groovy" name="init" id="009d164b-02fa-4f2f-8eef-684786bc879b"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
-tcase = project.testSuites["CheckText_method"].testCases["Uppercase_mistake"] ;
-int iteration = Integer.parseInt(tcase.getPropertyValue("iteration"))
+tcase.setPropertyValue("iteration", String.valueOf(0))
 groovyutils = new com.eviware.soapui.support.GroovyUtils(context)
 String projectpath = groovyutils.projectPath
 
 File file = new File(projectpath + "/resourses/"+tcase.getPropertyValue("input"))
-    def line = file.readLines().get(iteration)
+ tcase.setPropertyValue("text", file.text)</con:setupScript><con:tearDownScript>project = testRunner.testCase.testSuite.project ;
+tcase = project.testSuites["CheckText_method"].testCases["Words_duplication_mistake"] ;
+
+tcase.setPropertyValue("iteration", String.valueOf(0))</con:tearDownScript><con:properties><con:property><con:name>word_to_correct</con:name><con:value>есть есть еду</con:value></con:property><con:property><con:name>expected_length</con:name><con:value>4</con:value></con:property><con:property><con:name>expected_suggestion</con:name><con:value>есть</con:value></con:property><con:property><con:name>input</con:name><con:value>duplication_mistake_test_data.csv</con:value></con:property><con:property><con:name>iteration</con:name><con:value>0</con:value></con:property><con:property><con:name>text</con:name><con:value>ходить ходить пешком, ходить, 6 &amp; есть есть еду, есть, 4</con:value></con:property></con:properties></con:testCase><con:testCase id="48012026-8cf5-43be-bad4-ed37d1519eb9" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Uppercase_mistake" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Read_test_data" id="009d164b-02fa-4f2f-8eef-684786bc879b"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
+tcase = project.testSuites["CheckText_method"].testCases["Uppercase_mistake"] ;
+int iteration = Integer.parseInt(tcase.getPropertyValue("iteration"))
+    String[] lines =tcase.getPropertyValue("text").split(" &amp; ")
+    String line = lines[iteration]
     String[] testData = line.split(", ")
     
     tcase.setPropertyValue("word_to_correct", testData[0])
@@ -916,31 +914,32 @@ for(i=0; i&lt;expected.length;i++){
 a =  i+1;
 String result = new String(holder.getNodeValue("//xmlns:s" + "[" + a + "]"));
 assert result == expected[i]
-}</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="tear" id="ddd58d49-471e-4e9f-ba52-6436ef1e9f03"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
+}</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="Postcondition" id="ddd58d49-471e-4e9f-ba52-6436ef1e9f03"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
 tcase = project.testSuites["CheckText_method"].testCases["Uppercase_mistake"] ;
 int iteration = Integer.parseInt(tcase.getPropertyValue("iteration"))
 groovyutils = new com.eviware.soapui.support.GroovyUtils(context)
 String projectpath = groovyutils.projectPath
-
-File file = new File(projectpath + "/resourses/"+tcase.getPropertyValue("input"))
-int linesCount = file.readLines().size
+String[] lines =tcase.getPropertyValue("text").split(" &amp; ")
+int linesCount = lines.length
 if(iteration != linesCount - 1) {
 tcase.setPropertyValue("iteration", String.valueOf(iteration+1))
-testRunner.gotoStepByName("init")
+testRunner.gotoStepByName("Read_test_data")
 }</script></con:config></con:testStep><con:setupScript>project = testRunner.testCase.testSuite.project ;
 tcase = project.testSuites["CheckText_method"].testCases["Uppercase_mistake"] ;
 
-tcase.setPropertyValue("iteration", String.valueOf(0))</con:setupScript><con:tearDownScript>project = testRunner.testCase.testSuite.project ;
-tcase = project.testSuites["CheckText_method"].testCases["Uppercase_mistake"] ;
-
-tcase.setPropertyValue("iteration", String.valueOf(0))</con:tearDownScript><con:properties><con:property><con:name>word_to_correct</con:name><con:value>вАДим</con:value></con:property><con:property><con:name>expected_length</con:name><con:value>5</con:value></con:property><con:property><con:name>expected_suggestion</con:name><con:value>Вадим</con:value></con:property><con:property><con:name>input</con:name><con:value>upper_case_test_data.csv</con:value></con:property><con:property><con:name>iteration</con:name><con:value>0</con:value></con:property></con:properties></con:testCase><con:testCase id="03bb25f7-e0ef-4cc4-a174-e191531d0e17" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Spelling_mistake" searchProperties="true"><con:settings/><con:testStep type="groovy" name="init" id="1400fb47-31ab-4342-9349-877209b7c4c1"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
-tcase = project.testSuites["CheckText_method"].testCases["Spelling_mistake"] ;
-int iteration = Integer.parseInt(tcase.getPropertyValue("iteration"))
+tcase.setPropertyValue("iteration", String.valueOf(0))
 groovyutils = new com.eviware.soapui.support.GroovyUtils(context)
 String projectpath = groovyutils.projectPath
 
 File file = new File(projectpath + "/resourses/"+tcase.getPropertyValue("input"))
-    def line = file.readLines().get(iteration)
+ tcase.setPropertyValue("text", file.text)</con:setupScript><con:tearDownScript>project = testRunner.testCase.testSuite.project ;
+tcase = project.testSuites["CheckText_method"].testCases["Uppercase_mistake"] ;
+
+tcase.setPropertyValue("iteration", String.valueOf(0))</con:tearDownScript><con:properties><con:property><con:name>word_to_correct</con:name><con:value>вАДим</con:value></con:property><con:property><con:name>expected_length</con:name><con:value>5</con:value></con:property><con:property><con:name>expected_suggestion</con:name><con:value>Вадим</con:value></con:property><con:property><con:name>input</con:name><con:value>upper_case_test_data.csv</con:value></con:property><con:property><con:name>iteration</con:name><con:value>0</con:value></con:property><con:property><con:name>text</con:name><con:value>мОСКВА, Москва, 6 &amp; вАДим, Вадим, 5</con:value></con:property></con:properties></con:testCase><con:testCase id="03bb25f7-e0ef-4cc4-a174-e191531d0e17" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Spelling_mistake" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Read_test_data" id="1400fb47-31ab-4342-9349-877209b7c4c1"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
+tcase = project.testSuites["CheckText_method"].testCases["Spelling_mistake"] ;
+int iteration = Integer.parseInt(tcase.getPropertyValue("iteration"))
+    String[] lines =tcase.getPropertyValue("text").split(" &amp; ")
+    String line = lines[iteration]
     String[] testData = line.split(", ")
     
     tcase.setPropertyValue("word_to_correct", testData[0])
@@ -974,33 +973,33 @@ for(i=0; i&lt;expected.length;i++){
 a =  i+1;
 String result = new String(holder.getNodeValue("//xmlns:s" + "[" + a + "]"));
 assert result == expected[i]
-}</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="tear" id="1c3709d7-faf5-4410-a126-33f29ed34569"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
-tcase = project.testSuites["CheckText_method"].testCases["Email_skip_test"] ;
+}</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="Postcondition" id="1c3709d7-faf5-4410-a126-33f29ed34569"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
+tcase = project.testSuites["CheckText_method"].testCases["Spelling_mistake"] ;
 int iteration = Integer.parseInt(tcase.getPropertyValue("iteration"))
 groovyutils = new com.eviware.soapui.support.GroovyUtils(context)
 String projectpath = groovyutils.projectPath
-
-File file = new File(projectpath + "/resourses/"+tcase.getPropertyValue("input"))
-int linesCount = file.readLines().size
+String[] lines =tcase.getPropertyValue("text").split(" &amp; ")
+int linesCount = lines.length
 if(iteration != linesCount - 1) {
 tcase.setPropertyValue("iteration", String.valueOf(iteration+1))
-testRunner.gotoStepByName("init")
+testRunner.gotoStepByName("Read_test_data")
 }</script></con:config></con:testStep><con:setupScript>project = testRunner.testCase.testSuite.project ;
 tcase = project.testSuites["CheckText_method"].testCases["Spelling_mistake"] ;
 
 tcase.setPropertyValue("iteration", String.valueOf(0))
-</con:setupScript><con:tearDownScript>project = testRunner.testCase.testSuite.project ;
-tcase = project.testSuites["CheckText_method"].testCases["Spelling_mistake"] ;
-
-tcase.setPropertyValue("iteration", String.valueOf(0))
-</con:tearDownScript><con:properties><con:property><con:name>word_to_correct</con:name><con:value>карова</con:value></con:property><con:property><con:name>expected_suggestion</con:name><con:value>корова</con:value></con:property><con:property><con:name>expected_length</con:name><con:value>6</con:value></con:property><con:property><con:name>input</con:name><con:value>spelling_mistake_test_data.csv</con:value></con:property><con:property><con:name>iteration</con:name><con:value>0</con:value></con:property></con:properties></con:testCase><con:testCase id="7cbda76e-840a-4ef5-8285-bcbdce2898b3" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Email_skip_test" searchProperties="true"><con:settings/><con:testStep type="groovy" name="init" id="ef2c9db1-ec0b-4dd1-b5a4-6eb5a8bd2569"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
-tcase = project.testSuites["CheckText_method"].testCases["Email_skip_test"] ;
-int iteration = Integer.parseInt(tcase.getPropertyValue("iteration"))
 groovyutils = new com.eviware.soapui.support.GroovyUtils(context)
 String projectpath = groovyutils.projectPath
 
 File file = new File(projectpath + "/resourses/"+tcase.getPropertyValue("input"))
-    def line = file.readLines().get(iteration)
+ tcase.setPropertyValue("text", file.text)</con:setupScript><con:tearDownScript>project = testRunner.testCase.testSuite.project ;
+tcase = project.testSuites["CheckText_method"].testCases["Spelling_mistake"] ;
+
+tcase.setPropertyValue("iteration", String.valueOf(0))
+</con:tearDownScript><con:properties><con:property><con:name>word_to_correct</con:name><con:value>зобор</con:value></con:property><con:property><con:name>expected_suggestion</con:name><con:value>забор собор</con:value></con:property><con:property><con:name>expected_length</con:name><con:value>5</con:value></con:property><con:property><con:name>input</con:name><con:value>spelling_mistake_test_data.csv</con:value></con:property><con:property><con:name>iteration</con:name><con:value>0</con:value></con:property><con:property><con:name>text</con:name><con:value>карова, корова, 6 &amp; малоко, молоко, 6 &amp; зобор, забор собор, 5</con:value></con:property></con:properties></con:testCase><con:testCase id="7cbda76e-840a-4ef5-8285-bcbdce2898b3" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Email_skip_test" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Read_test_data" id="ef2c9db1-ec0b-4dd1-b5a4-6eb5a8bd2569"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
+tcase = project.testSuites["CheckText_method"].testCases["Email_skip_test"] ;
+int iteration = Integer.parseInt(tcase.getPropertyValue("iteration"))
+    String[] lines =tcase.getPropertyValue("text").split(" &amp; ")
+    String line = lines[iteration]
     String[] testData = line.split(", ")
     
     tcase.setPropertyValue("word_to_correct", testData[0])
@@ -1031,36 +1030,33 @@ for(i=0; i&lt;expected.length;i++){
 a =  i+1;
 String result = new String(holder.getNodeValue("//xmlns:s" + "[" + a + "]"));
 assert result == expected[i]
-}</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="tear" id="debabee7-58e9-4fd1-8fbb-4cf2ceebac79"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
+}</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="Postcondition" id="debabee7-58e9-4fd1-8fbb-4cf2ceebac79"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
 tcase = project.testSuites["CheckText_method"].testCases["Email_skip_test"] ;
 int iteration = Integer.parseInt(tcase.getPropertyValue("iteration"))
-
 groovyutils = new com.eviware.soapui.support.GroovyUtils(context)
 String projectpath = groovyutils.projectPath
-
-File file = new File(projectpath + "/resourses/"+tcase.getPropertyValue("input"))
-int linesCount = file.readLines().size
+String[] lines =tcase.getPropertyValue("text").split(" &amp; ")
+int linesCount = lines.length
 if(iteration != linesCount - 1) {
 tcase.setPropertyValue("iteration", String.valueOf(iteration+1))
-testRunner.gotoStepByName("init")
+testRunner.gotoStepByName("Read_test_data")
 }</script></con:config></con:testStep><con:setupScript>project = testRunner.testCase.testSuite.project ;
 tcase = project.testSuites["CheckText_method"].testCases["Email_skip_test"] ;
 
 tcase.setPropertyValue("iteration", String.valueOf(0))
-</con:setupScript><con:tearDownScript>project = testRunner.testCase.testSuite.project ;
-tcase = project.testSuites["CheckText_method"].testCases["Email_skip_test"] ;
-
-tcase.setPropertyValue("iteration", String.valueOf(0))
-</con:tearDownScript><con:properties><con:property><con:name>word_to_correct</con:name><con:value>kolya@email.ru кень</con:value></con:property><con:property><con:name>expected_suggestion</con:name><con:value>конь кен Кент кинь</con:value></con:property><con:property><con:name>expected_length</con:name><con:value>4</con:value></con:property><con:property><con:name>input</con:name><con:value>email_skip_test_data.csv</con:value></con:property><con:property><con:name>iteration</con:name><con:value>0</con:value></con:property></con:properties></con:testCase><con:testCase id="a4cf2e32-b010-4c45-b8ae-b6a3dcff400a" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Digits_skip_test" searchProperties="true"><con:settings/><con:testStep type="groovy" name="init" id="acfd92c0-49a5-4597-af71-5e7e07e97dd7"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
-tcase = project.testSuites["CheckText_method"].testCases["Digits_skip_test"] ;
-int iteration = Integer.parseInt(tcase.getPropertyValue("iteration"))
-
-
 groovyutils = new com.eviware.soapui.support.GroovyUtils(context)
 String projectpath = groovyutils.projectPath
 
 File file = new File(projectpath + "/resourses/"+tcase.getPropertyValue("input"))
-    def line = file.readLines().get(iteration)
+ tcase.setPropertyValue("text", file.text)</con:setupScript><con:tearDownScript>project = testRunner.testCase.testSuite.project ;
+tcase = project.testSuites["CheckText_method"].testCases["Email_skip_test"] ;
+
+tcase.setPropertyValue("iteration", String.valueOf(0))
+</con:tearDownScript><con:properties><con:property><con:name>word_to_correct</con:name><con:value>kolya@email.ru кень</con:value></con:property><con:property><con:name>expected_suggestion</con:name><con:value>конь кен Кент кинь</con:value></con:property><con:property><con:name>expected_length</con:name><con:value>4</con:value></con:property><con:property><con:name>input</con:name><con:value>email_skip_test_data.csv</con:value></con:property><con:property><con:name>iteration</con:name><con:value>0</con:value></con:property><con:property><con:name>text</con:name><con:value>ivafdfdnov@email.ru малоко, малого молоко, 6 &amp; kolya@email.ru кень, конь кен Кент кинь, 4</con:value></con:property></con:properties></con:testCase><con:testCase id="a4cf2e32-b010-4c45-b8ae-b6a3dcff400a" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Digits_skip_test" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Read_test_data" id="acfd92c0-49a5-4597-af71-5e7e07e97dd7"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
+tcase = project.testSuites["CheckText_method"].testCases["Digits_skip_test"] ;
+int iteration = Integer.parseInt(tcase.getPropertyValue("iteration"))
+    String[] lines =tcase.getPropertyValue("text").split(" &amp; ")
+    String line = lines[iteration]
     String[] testData = line.split(", ")
     
     tcase.setPropertyValue("word_to_correct", testData[0])
@@ -1091,26 +1087,29 @@ for(i=0; i&lt;expected.length;i++){
 a =  i+1;
 String result = new String(holder.getNodeValue("//xmlns:s" + "[" + a + "]"));
 assert result == expected[i]
-}</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="tear" id="8b7121ae-b75c-488f-8538-cc74c0b13b87"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
+}</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="Postcondition" id="8b7121ae-b75c-488f-8538-cc74c0b13b87"><con:settings/><con:config><script>project = testRunner.testCase.testSuite.project ;
 tcase = project.testSuites["CheckText_method"].testCases["Digits_skip_test"] ;
 int iteration = Integer.parseInt(tcase.getPropertyValue("iteration"))
 groovyutils = new com.eviware.soapui.support.GroovyUtils(context)
 String projectpath = groovyutils.projectPath
-
-File file = new File(projectpath + "/resourses/"+tcase.getPropertyValue("input"))
-int linesCount = file.readLines().size
+String[] lines =tcase.getPropertyValue("text").split(" &amp; ")
+int linesCount = lines.length
 if(iteration != linesCount - 1) {
 tcase.setPropertyValue("iteration", String.valueOf(iteration+1))
-testRunner.gotoStepByName("init")
+testRunner.gotoStepByName("Read_test_data")
 }</script></con:config></con:testStep><con:setupScript>project = testRunner.testCase.testSuite.project ;
 tcase = project.testSuites["CheckText_method"].testCases["Digits_skip_test"] ;
 
 tcase.setPropertyValue("iteration", String.valueOf(0))
-</con:setupScript><con:tearDownScript>project = testRunner.testCase.testSuite.project ;
+groovyutils = new com.eviware.soapui.support.GroovyUtils(context)
+String projectpath = groovyutils.projectPath
+
+File file = new File(projectpath + "/resourses/"+tcase.getPropertyValue("input"))
+ tcase.setPropertyValue("text", file.text)</con:setupScript><con:tearDownScript>project = testRunner.testCase.testSuite.project ;
 tcase = project.testSuites["CheckText_method"].testCases["Digits_skip_test"] ;
 
 tcase.setPropertyValue("iteration", String.valueOf(0))
-</con:tearDownScript><con:properties><con:property><con:name>word_to_correct</con:name><con:value>иванов228 Масква</con:value></con:property><con:property><con:name>expected_suggestion</con:name><con:value>Москва</con:value></con:property><con:property><con:name>expected_length</con:name><con:value>6</con:value></con:property><con:property><con:name>input</con:name><con:value>skip_digits_test_data.csv</con:value></con:property><con:property><con:name>iteration</con:name><con:value>0</con:value></con:property></con:properties></con:testCase><con:testCase id="5fa2dd86-8b1b-44c6-a899-0ff76dd0aa6e" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Request_contains_symbols" searchProperties="true"><con:settings/><con:testStep type="request" name="POST_request" id="13eeb815-a53c-4c48-9e67-ac9d6097a075"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>SpellServiceSoap</con:interface><con:operation>checkText</con:operation><con:request name="POST_request" id="38f40f63-1a49-4414-8b24-4f1619ecf66a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#resourse}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spel="http://speller.yandex.net/services/spellservice">\r
+</con:tearDownScript><con:properties><con:property><con:name>word_to_correct</con:name><con:value>иванов228 Масква</con:value></con:property><con:property><con:name>expected_suggestion</con:name><con:value>Москва</con:value></con:property><con:property><con:name>expected_length</con:name><con:value>6</con:value></con:property><con:property><con:name>input</con:name><con:value>skip_digits_test_data.csv</con:value></con:property><con:property><con:name>iteration</con:name><con:value>0</con:value></con:property><con:property><con:name>text</con:name><con:value>малоко23113123 гарод, город, 5 &amp; иванов228 Масква, Москва, 6</con:value></con:property></con:properties></con:testCase><con:testCase id="5fa2dd86-8b1b-44c6-a899-0ff76dd0aa6e" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Request_contains_symbols" searchProperties="true"><con:settings/><con:testStep type="request" name="POST_request" id="13eeb815-a53c-4c48-9e67-ac9d6097a075"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>SpellServiceSoap</con:interface><con:operation>checkText</con:operation><con:request name="POST_request" id="38f40f63-1a49-4414-8b24-4f1619ecf66a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#resourse}</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spel="http://speller.yandex.net/services/spellservice">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <spel:CheckTextRequest options="2">\r
