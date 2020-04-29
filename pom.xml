@@ -10,7 +10,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
+       
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
 
@@ -19,16 +19,24 @@
 
         <testng.version>7.1.0</testng.version>
         <assertj.version>3.15.0</assertj.version>
+
         <lombok.version>1.18.10</lombok.version>
+        
+        <cucumber.version>5.6.0</cucumber.version>
+
 
         <selenium.version>3.141.59</selenium.version>
         <jdi.version>1.2.3</jdi.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson.version>1.9.13</jackson.version>
 
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+
         <guava.version>22.0</guava.version>
+        <allure-maven-plugin.version>2.10.0</allure-maven-plugin.version>
+
+        <allure.version>2.13.2</allure.version>
+        <aspectj.version>1.9.5</aspectj.version>
 
         <calculator.version>1.0</calculator.version>
     </properties>
@@ -65,7 +73,7 @@
         </profile>
 
         <profile>
-            <id>hw2_selenium_all</id>
+            <id>hw2_all</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -75,7 +83,7 @@
         </profile>
 
         <profile>
-            <id>hw3_all_tests</id>
+            <id>hw3_all</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -83,9 +91,9 @@
                 <suite.xml>src/test/resources/suites_hw3/All_tests_suite.xml</suite.xml>
             </properties>
         </profile>
-
-        <profile>
-            <id>hw4_all</id>
+      
+       <profile> 
+          <id>hw4_all</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -94,16 +102,36 @@
             </properties>
         </profile>
 
-        <profile>
+        <profile>          
+            <id>hw5_all</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.xml>src/test/resources/suites_hw5/All_test_suite.xml</suite.xml>
+            </properties>
+        </profile>
+      
+       <profile>      
+            <id>hw6_all</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation> 
+            <properties>
+                <suite.xml>src/test/resources/suites_hw6/all_cucumber_tests.xml</suite.xml>
+            </properties>
+        </profile>
+    
+        <profile>      
             <id>hw_jdi</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
-            </activation>
+            </activation> 
             <properties>
                 <suite.xml>src\test\resources\suites_hw_jdi\all_tests.xml</suite.xml>
             </properties>
         </profile>
-
+   
     </profiles>
 
     <dependencies>
@@ -152,6 +180,34 @@
             <artifactId>jackson-core-asl</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -171,7 +227,29 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
-                    <suiteXmlFiles>${suite.xml}</suiteXmlFiles>
+                    <suiteXmlFiles>
+                        <xmlFile>${suite.xml}</xmlFile>
+                    </suiteXmlFiles>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure-maven-plugin.version}</version>
+                <configuration>
+                    <reportVersion>${allure.version}</reportVersion>
+                    <resultsDirectory>${project.basedir}/allure-results</resultsDirectory>
                 </configuration>
             </plugin>
         </plugins>

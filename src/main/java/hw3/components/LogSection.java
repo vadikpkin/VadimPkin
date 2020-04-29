@@ -29,20 +29,30 @@ public class LogSection extends AbstractPageComposite {
 
     public boolean isRadioLogDisplayed(String radioName) {
         waitForLogsToBeVisible();
+        return isWebElementLogDisplayed(radioName, "metal: value changed to ");
+    }
+
+    public boolean isDropdownLogDisplayed(String dropdownValue) {
+        waitForLogsToBeVisible();
+        return isWebElementLogDisplayed(dropdownValue, "Colors: value changed to ");
+    }
+
+    public boolean isWebElementLogDisplayed(String value, String logText) {
+        waitForLogsToBeVisible();
         boolean isDisplayed = false;
         for (WebElement log : logs) {
-            if (log.getText().contains("metal: value changed to " + radioName)) {
+            if (log.getText().contains(logText + value)) {
                 isDisplayed = true;
             }
         }
         return isDisplayed;
     }
 
-    public boolean isDropdownLogDisplayed(String dropdownValue) {
+    public boolean isLogTextDisplayed(String logText) {
         waitForLogsToBeVisible();
         boolean isDisplayed = false;
         for (WebElement log : logs) {
-            if (log.getText().contains("Colors: value changed to " + dropdownValue)) {
+            if (log.getText().contains(logText)) {
                 isDisplayed = true;
             }
         }
