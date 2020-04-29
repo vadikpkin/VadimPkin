@@ -24,6 +24,7 @@
         
         <cucumber.version>5.6.0</cucumber.version>
 
+        <rest.assured.version>4.3.0</rest.assured.version>
 
         <selenium.version>3.141.59</selenium.version>
         <jdi.version>1.2.3</jdi.version>
@@ -201,12 +202,21 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-core</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest.assured.version}</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 
