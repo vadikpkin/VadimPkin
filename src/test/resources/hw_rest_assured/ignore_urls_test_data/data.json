@@ -1,0 +1,34 @@
+[
+  {
+    "textRequest" : "helo@email.ru dogtor",
+    "suggestions": [
+      {
+        "code": 1,
+        "pos": 14,
+        "row": 0,
+        "col": 14,
+        "len": 6,
+        "word": "dogtor",
+        "s": [
+          "doctor"
+        ]
+      }
+    ]
+  },
+  {
+    "textRequest" : "epam.com lozy day",
+    "suggestions": [
+      {
+        "code": 1,
+        "pos": 9,
+        "row": 0,
+        "col": 9,
+        "len": 4,
+        "word": "lozy",
+        "s": [
+          "lazy"
+        ]
+      }
+    ]
+  }
+]

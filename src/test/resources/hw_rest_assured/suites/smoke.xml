@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Smoke" verbose="1" >
+    <test name="Smoke">
+        <classes>
+            <class name="hw_rest_assured.YandexSpellerApiTests">
+                <methods>
+                    <include name="spellingMistakeTestDefaultLangPass"/>
+                    <include name="spellingMistakeTestUkrainianPass"/>
+                    <include name="upperCaseMistakeDefaultLangPass"/>
+                    <include name="upperCaseMistakeUkrainianLangPass"/>
+                    <include name="duplicationMistakeDefaultLangPass"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+</suite>
