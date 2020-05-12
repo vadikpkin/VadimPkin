@@ -1,5 +1,6 @@
 [
   {
+    "id": "9",
     "textRequest" : "кросивая масква",
     "suggestions": [
       {
@@ -27,6 +28,7 @@
     ]
   },
   {
+    "id": "10",
     "textRequest" : "хорошая курицо",
     "suggestions": [
       {

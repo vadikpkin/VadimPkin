@@ -1,41 +1,15 @@
 [
   {
-    "textRequest" : "very very good",
-    "suggestions": [
-      {
-        "code": 2,
-        "pos": 5,
-        "row": 0,
-        "col": 5,
-        "len": 4,
-        "word": "very",
-        "s": []
-      }
-    ]
+    "id": "1",
+    "textRequest": "very very good",
+    "suggestionsTexts": []
   },
   {
-    "textRequest" : "много много малока",
-    "suggestions": [
-      {
-        "code": 2,
-        "pos": 6,
-        "row": 0,
-        "col": 6,
-        "len": 5,
-        "word": "много",
-        "s": []
-      },
-      {
-        "code": 1,
-        "pos": 12,
-        "row": 0,
-        "col": 12,
-        "len": 6,
-        "word": "малока",
-        "s": [
-          "молока"
-        ]
-      }
+    "id": "2",
+    "textRequest": "много много малока",
+    "suggestionsTexts": [
+      "",
+      "молока"
     ]
   }
 ]

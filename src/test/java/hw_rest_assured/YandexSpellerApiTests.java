@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 
 import static hw_rest_assured.enums.YandexSpellerLang.*;
 import static hw_rest_assured.enums.YandexSpellerOptions.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class YandexSpellerApiTests {
@@ -20,60 +19,73 @@ public class YandexSpellerApiTests {
         yandexSpellerActions = new YandexSpellerActions();
     }
 
+    @Test(dataProvider = "dataProviderCorrectWord", dataProviderClass = YandexSpellerDataProviders.class)
+    public void correctWordDefaultLangTestPass(Object testData) {
+        SpellerSuggestion[] actualSuggestions = yandexSpellerActions.checkText(testData.toString());
+        new YandexSpellerAssertions()
+                .verifyEmptyResponse(actualSuggestions);
+
+    }
 
     @Test(dataProvider = "dataProviderSpellingMistakeRuEn", dataProviderClass = YandexSpellerDataProviders.class)
-    public void spellingMistakeTestDefaultLangPass(SpellerDataEntity testData) {
-        assertRequest(testData);
+    public void spellingMistakeTestDefaultLangFullResponseVerifyPass(SpellerDataEntity testData) {
+        SpellerSuggestion[] actualSuggestions = yandexSpellerActions.checkText(testData.getTextRequest());
+        new YandexSpellerAssertions()
+                .verifyFullResponseEntity(actualSuggestions, testData.getSuggestions());
     }
 
     @Test(dataProvider = "dataProviderSpellingMistakeUk", dataProviderClass = YandexSpellerDataProviders.class)
-    public void spellingMistakeTestUkrainianPass(SpellerDataEntity testData) {
-        assertRequest(testData, UKRAINIAN);
+    public void spellingMistakeTestUkrainianSuggestionVerifyPass(SpellerDataEntity testData) {
+        assertSuggestions(testData, UKRAINIAN);
     }
 
     @Test(dataProvider = "dataProviderUpperCaseMistake", dataProviderClass = YandexSpellerDataProviders.class)
-    public void upperCaseMistakeDefaultLangPass(SpellerDataEntity testData) {
-        assertRequest(testData);
+    public void upperCaseMistakeDefaultLangSuggestionVerifyPass(SpellerDataEntity testData) {
+        assertSuggestions(testData);
     }
 
     @Test(dataProvider = "dataProviderUpperCaseMistakeUk", dataProviderClass = YandexSpellerDataProviders.class)
-    public void upperCaseMistakeUkrainianLangPass(SpellerDataEntity testData) {
-        assertRequest(testData, UKRAINIAN);
+    public void upperCaseMistakeUkrainianLangSuggestionVerifyPass(SpellerDataEntity testData) {
+        assertSuggestions(testData, UKRAINIAN);
     }
 
-    @Test(groups = {"smoke"},dataProvider = "dataProviderWordsDuplicationMistake", dataProviderClass = YandexSpellerDataProviders.class)
-    public void duplicationMistakeDefaultLangPass(SpellerDataEntity testData) {
-        assertRequest(testData, FIND_REPEAT_WORDS);
+    @Test(dataProvider = "dataProviderWordsDuplicationMistake", dataProviderClass = YandexSpellerDataProviders.class)
+    public void duplicationMistakeDefaultLangSuggestionVerifyPass(SpellerDataEntity testData) {
+        assertSuggestions(testData, FIND_REPEAT_WORDS);
     }
 
     @Test(dataProvider = "dataProviderIgnoreCapitalization", dataProviderClass = YandexSpellerDataProviders.class)
-    public void ignoreCapitalizationTestDefaultLangPass(SpellerDataEntity testData) {
-        assertRequest(testData, IGNORE_CAPITALIZATION);
+    public void ignoreCapitalizationTestDefaultLangSuggestionVerifyPass(SpellerDataEntity testData) {
+        assertSuggestions(testData, IGNORE_CAPITALIZATION);
     }
 
     @Test(dataProvider = "dataProviderIgnoreDigits", dataProviderClass = YandexSpellerDataProviders.class)
-    public void ignoreDigitsTestDefaultLangPass(SpellerDataEntity testData) {
-        assertRequest(testData, IGNORE_DIGITS);
+    public void ignoreDigitsTestDefaultLangSuggestionVerifyPass(SpellerDataEntity testData) {
+        assertSuggestions(testData, IGNORE_DIGITS);
     }
 
     @Test(dataProvider = "dataProviderIgnoreUrls", dataProviderClass = YandexSpellerDataProviders.class)
-    public void ignoreUrlTestDefaultLangPass(SpellerDataEntity testData) {
-        assertRequest(testData, IGNORE_URLS);
+    public void ignoreUrlTestDefaultLangSuggestionVerifyPass(SpellerDataEntity testData) {
+        assertSuggestions(testData, IGNORE_URLS);
     }
 
-    private void assertRequest(SpellerDataEntity testData) {
+    private void assertSuggestions(SpellerDataEntity testData) {
         SpellerSuggestion[] actualSpellerSuggestions = yandexSpellerActions.checkText(testData.getTextRequest());
-        assertThat(actualSpellerSuggestions).isEqualTo(testData.getSuggestions());
+        verifySuggestions(actualSpellerSuggestions, testData);
     }
-
-    private void assertRequest(SpellerDataEntity testData, YandexSpellerOptions... options) {
+    
+    private void assertSuggestions(SpellerDataEntity testData, YandexSpellerOptions... options) {
         SpellerSuggestion[] actualSpellerSuggestions = yandexSpellerActions.checkText(testData.getTextRequest(), options);
-        assertThat(actualSpellerSuggestions).isEqualTo(testData.getSuggestions());
+        verifySuggestions(actualSpellerSuggestions, testData);
     }
 
-    private void assertRequest(SpellerDataEntity testData, YandexSpellerLang... langs) {
+    private void assertSuggestions(SpellerDataEntity testData, YandexSpellerLang... langs) {
         SpellerSuggestion[] actualSpellerSuggestions = yandexSpellerActions.checkText(testData.getTextRequest(), langs);
-        assertThat(actualSpellerSuggestions).isEqualTo(testData.getSuggestions());
+        verifySuggestions(actualSpellerSuggestions, testData);
     }
 
+    private void verifySuggestions(SpellerSuggestion[] actualSpellerSuggestions, SpellerDataEntity testData) {
+        new YandexSpellerAssertions()
+                .verifySuggestion(actualSpellerSuggestions, testData.getSuggestionsTexts());
+    }
 }

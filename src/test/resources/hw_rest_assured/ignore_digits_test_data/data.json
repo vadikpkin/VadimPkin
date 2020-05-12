@@ -1,12 +1,12 @@
 [
   {
+    "id": "5",
     "textRequest" : "любит123",
-    "suggestions": [
-    ]
+    "suggestionsTexts": []
   },
   {
+    "id": "6",
     "textRequest" : "helo123",
-    "suggestions": [
-    ]
+    "suggestionsTexts": []
   }
 ]

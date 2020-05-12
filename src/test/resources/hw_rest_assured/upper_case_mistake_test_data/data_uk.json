@@ -1,45 +1,12 @@
 [
   {
+    "id": "15",
     "textRequest" : "болгарія",
-    "suggestions": [
-      {
-        "code": 3,
-        "pos": 0,
-        "row": 0,
-        "col": 0,
-        "len": 8,
-        "word": "болгарія",
-        "s": [
-          "Болгарія"
-        ]
-      }
-    ]
+    "suggestionsTexts": ["Болгарія"]
   },
   {
+    "id": "16",
     "textRequest" : "естонія таллінн",
-    "suggestions": [
-      {
-        "code": 3,
-        "pos": 0,
-        "row": 0,
-        "col": 0,
-        "len": 7,
-        "word": "естонія",
-        "s": [
-          "Естонія"
-        ]
-      },
-      {
-        "code": 3,
-        "pos": 8,
-        "row": 0,
-        "col": 8,
-        "len": 7,
-        "word": "таллінн",
-        "s": [
-          "Таллінн"
-        ]
-      }
-    ]
+    "suggestionsTexts": ["Естонія", "Таллінн"]
   }
 ]

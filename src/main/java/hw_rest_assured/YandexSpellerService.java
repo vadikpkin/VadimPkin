@@ -16,7 +16,7 @@ public class YandexSpellerService {
 
     public YandexSpellerService() {
         requestSpec = new RequestSpecBuilder()
-                .setBaseUri(PropertyReader.readProp("baseUri","YandexSpellerTest.properties"))
+                .setBaseUri(PropertyReader.readProp("baseUri"))
                 .addFilter(new RequestLoggingFilter())
                 .addFilter(new ResponseLoggingFilter())
                 .build();

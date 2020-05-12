@@ -1,12 +1,12 @@
 [
   {
+    "id": "3",
     "textRequest" : "мОСКВА",
-    "suggestions": [
-    ]
+    "suggestionsTexts": []
   },
   {
+    "id": "4",
     "textRequest" : "london",
-    "suggestions": [
-    ]
+    "suggestionsTexts": []
   }
 ]

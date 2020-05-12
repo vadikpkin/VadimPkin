@@ -14,4 +14,12 @@ public class SpellerSuggestion {
     private String len;
     private String word;
     private List<String> s;
+
+    public SpellerSuggestion(List<String> s) {
+        this.s = s;
+    }
+
+    public String getSuggestionsAsString() {
+        return String.join(" ", s);
+    }
 }

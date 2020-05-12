@@ -29,9 +29,11 @@ public final class PropertyReader {
         throw new RuntimeException("Property reading failed");
     }
 
-    public static String readProp(String property, String fileName) {
+    public static String readProp(String property) {
 
-        try (InputStream input = PropertyReader.class.getClassLoader().getResourceAsStream(fileName)) {
+        String path = "YandexSpellerTest.properties";
+
+        try (InputStream input = PropertyReader.class.getClassLoader().getResourceAsStream(path)) {
 
             Properties prop = new Properties();
 
