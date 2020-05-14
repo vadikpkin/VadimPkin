@@ -2,90 +2,58 @@ package hw_rest_assured;
 
 import hw_rest_assured.dto.SpellerDataEntity;
 import hw_rest_assured.dto.SpellerSuggestion;
-import hw_rest_assured.enums.YandexSpellerLang;
-import hw_rest_assured.enums.YandexSpellerOptions;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static hw_rest_assured.enums.YandexSpellerLang.*;
-import static hw_rest_assured.enums.YandexSpellerOptions.*;
-
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class YandexSpellerApiTests {
+
+
     private YandexSpellerActions yandexSpellerActions;
 
     @BeforeClass
-    public void initData() {
+    public void init() {
         yandexSpellerActions = new YandexSpellerActions();
     }
 
-    @Test(dataProvider = "dataProviderCorrectWord", dataProviderClass = YandexSpellerDataProviders.class)
-    public void correctWordDefaultLangTestPass(Object testData) {
-        SpellerSuggestion[] actualSuggestions = yandexSpellerActions.checkText(testData.toString());
-        new YandexSpellerAssertions()
-                .verifyEmptyResponse(actualSuggestions);
-
+    @Test(dataProviderClass = YandexSpellerDataProviders.class, dataProvider = "checkTextProvider")
+    public void checkTextMethodSuggestionsTest(SpellerDataEntity spellerDataEntity) {
+        //Sending request with incorrect text
+        SpellerSuggestion[] result = yandexSpellerActions.checkText(spellerDataEntity);
+        //Verifying suggestions
+        new YandexSpellerAssertions(result)
+                .verifyNotEmptyResponse()
+                .verifySuggestion(spellerDataEntity.getSuggestionsTexts());
+        //Writing suggestions to text request of test data
+        spellerDataEntity.setTextRequest(Arrays.stream(result).map(SpellerSuggestion::getSuggestionsAsString)
+                .collect(Collectors.joining(",")));
+        //Sending request with suggestions for speller
+        result = yandexSpellerActions.checkText(spellerDataEntity);
+        //Verifying that suggestion are correct
+        new YandexSpellerAssertions(result).verifyEmptyResponse();
     }
 
-    @Test(dataProvider = "dataProviderSpellingMistakeRuEn", dataProviderClass = YandexSpellerDataProviders.class)
-    public void spellingMistakeTestDefaultLangFullResponseVerifyPass(SpellerDataEntity testData) {
-        SpellerSuggestion[] actualSuggestions = yandexSpellerActions.checkText(testData.getTextRequest());
-        new YandexSpellerAssertions()
-                .verifyFullResponseEntity(actualSuggestions, testData.getSuggestions());
+    @Test(dataProviderClass = YandexSpellerDataProviders.class, dataProvider = "ignoreProvider")
+    public void correctWordAndIgnoreDefaultLangTestPass(SpellerDataEntity spellerDataEntity) {
+        SpellerSuggestion[] result = yandexSpellerActions.checkText(spellerDataEntity);
+        new YandexSpellerAssertions(result)
+                .verifyEmptyResponse();
     }
 
-    @Test(dataProvider = "dataProviderSpellingMistakeUk", dataProviderClass = YandexSpellerDataProviders.class)
-    public void spellingMistakeTestUkrainianSuggestionVerifyPass(SpellerDataEntity testData) {
-        assertSuggestions(testData, UKRAINIAN);
+    @Test(dataProvider = "fullResponseProvider", dataProviderClass = YandexSpellerDataProviders.class)
+    public void checkTextFullResponseVerifyTest(SpellerDataEntity spellerDataEntity) {
+        SpellerSuggestion[] result = yandexSpellerActions.checkText(spellerDataEntity);
+        new YandexSpellerAssertions(result)
+                .verifyNotEmptyResponse()
+                .verifyCode(spellerDataEntity.getCodesAsString())
+                .verifyPos(spellerDataEntity.getPosAsString())
+                .verifyRow(spellerDataEntity.getRowsAsString())
+                .verifyCol(spellerDataEntity.getColsAsString())
+                .verifyLen(spellerDataEntity.getLenAsString())
+                .verifyWord(spellerDataEntity.getWordsAsString())
+                .verifySuggestion(spellerDataEntity.getSuggestions());
     }
 
-    @Test(dataProvider = "dataProviderUpperCaseMistake", dataProviderClass = YandexSpellerDataProviders.class)
-    public void upperCaseMistakeDefaultLangSuggestionVerifyPass(SpellerDataEntity testData) {
-        assertSuggestions(testData);
-    }
-
-    @Test(dataProvider = "dataProviderUpperCaseMistakeUk", dataProviderClass = YandexSpellerDataProviders.class)
-    public void upperCaseMistakeUkrainianLangSuggestionVerifyPass(SpellerDataEntity testData) {
-        assertSuggestions(testData, UKRAINIAN);
-    }
-
-    @Test(dataProvider = "dataProviderWordsDuplicationMistake", dataProviderClass = YandexSpellerDataProviders.class)
-    public void duplicationMistakeDefaultLangSuggestionVerifyPass(SpellerDataEntity testData) {
-        assertSuggestions(testData, FIND_REPEAT_WORDS);
-    }
-
-    @Test(dataProvider = "dataProviderIgnoreCapitalization", dataProviderClass = YandexSpellerDataProviders.class)
-    public void ignoreCapitalizationTestDefaultLangSuggestionVerifyPass(SpellerDataEntity testData) {
-        assertSuggestions(testData, IGNORE_CAPITALIZATION);
-    }
-
-    @Test(dataProvider = "dataProviderIgnoreDigits", dataProviderClass = YandexSpellerDataProviders.class)
-    public void ignoreDigitsTestDefaultLangSuggestionVerifyPass(SpellerDataEntity testData) {
-        assertSuggestions(testData, IGNORE_DIGITS);
-    }
-
-    @Test(dataProvider = "dataProviderIgnoreUrls", dataProviderClass = YandexSpellerDataProviders.class)
-    public void ignoreUrlTestDefaultLangSuggestionVerifyPass(SpellerDataEntity testData) {
-        assertSuggestions(testData, IGNORE_URLS);
-    }
-
-    private void assertSuggestions(SpellerDataEntity testData) {
-        SpellerSuggestion[] actualSpellerSuggestions = yandexSpellerActions.checkText(testData.getTextRequest());
-        verifySuggestions(actualSpellerSuggestions, testData);
-    }
-    
-    private void assertSuggestions(SpellerDataEntity testData, YandexSpellerOptions... options) {
-        SpellerSuggestion[] actualSpellerSuggestions = yandexSpellerActions.checkText(testData.getTextRequest(), options);
-        verifySuggestions(actualSpellerSuggestions, testData);
-    }
-
-    private void assertSuggestions(SpellerDataEntity testData, YandexSpellerLang... langs) {
-        SpellerSuggestion[] actualSpellerSuggestions = yandexSpellerActions.checkText(testData.getTextRequest(), langs);
-        verifySuggestions(actualSpellerSuggestions, testData);
-    }
-
-    private void verifySuggestions(SpellerSuggestion[] actualSpellerSuggestions, SpellerDataEntity testData) {
-        new YandexSpellerAssertions()
-                .verifySuggestion(actualSpellerSuggestions, testData.getSuggestionsTexts());
-    }
 }

@@ -1,12 +1,14 @@
 package hw_rest_assured.enums;
 
-public enum  YandexSpellerLang {
 
+public enum YandexSpellerLang {
     RUSSIAN("ru"),
 
     UKRAINIAN("uk"),
 
-    ENGLISH("en");
+    ENGLISH("en"),
+
+    DEFAULT("ru,en");
 
     public String value;
 

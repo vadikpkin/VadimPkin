@@ -1,41 +1,13 @@
 [
   {
-    "id": "9",
-    "textRequest" : "кросивая масква",
+    "id": "10",
+    "textRequest" : "курицо",
     "suggestions": [
       {
         "code": 1,
         "pos": 0,
         "row": 0,
         "col": 0,
-        "len": 8,
-        "word": "кросивая",
-        "s": [
-          "красивая"
-        ]
-      },
-      {
-        "code": 1,
-        "pos": 9,
-        "row": 0,
-        "col": 9,
-        "len": 6,
-        "word": "масква",
-        "s": [
-          "Москва"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "10",
-    "textRequest" : "хорошая курицо",
-    "suggestions": [
-      {
-        "code": 1,
-        "pos": 8,
-        "row": 0,
-        "col": 8,
         "len": 6,
         "word": "курицо",
         "s": [

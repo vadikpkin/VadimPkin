@@ -11,69 +11,27 @@ import java.util.List;
 
 public class YandexSpellerDataProviders {
 
-    public static final String SPELLING_MISTAKE_TEST_DATA_DATA_RU_EN_JSON =
+    public static final String CHECK_TEXT_TEST_DATA_JSON =
+            "src/test/resources/hw_rest_assured/suggestion_test_data/data.json";
+    public static final String IGNORE_TEST_DATA_JSON =
+            "src/test/resources/hw_rest_assured/speller_ignore_test_data/data.json";
+    public static final String FULL_RESPONSE_DATA_JSON =
             "src/test/resources/hw_rest_assured/spelling_mistake_test_data/data_ru_en_full_response.json";
-    public static final String SPELLING_MISTAKE_TEST_DATA_DATA_UK_JSON =
-            "src/test/resources/hw_rest_assured/spelling_mistake_test_data/data_uk.json";
-    public static final String UPPER_CASE_MISTAKE_TEST_DATA_DATA_RU_EN_JSON =
-            "src/test/resources/hw_rest_assured/upper_case_mistake_test_data/data_ru_en.json";
-    public static final String UPPER_CASE_MISTAKE_TEST_DATA_DATA_UK_JSON =
-            "src/test/resources/hw_rest_assured/upper_case_mistake_test_data/data_uk.json";
-    public static final String DUPLICATION_MISTAKE_TEST_DATA_DATA_JSON =
-            "src/test/resources/hw_rest_assured/duplication_mistake_test_data/data.json";
-    public static final String IGNORE_CAPITALIZATION_TEST_DATA_DATA_JSON =
-            "src/test/resources/hw_rest_assured/ignore_capitalization_test_data/data.json";
-    public static final String IGNORE_DIGITS_TEST_DATA_DATA_JSON =
-            "src/test/resources/hw_rest_assured/ignore_digits_test_data/data.json";
-    public static final String IGNORE_URLS_TEST_DATA_DATA_JSON =
-            "src/test/resources/hw_rest_assured/ignore_urls_test_data/data.json";
+
 
     @DataProvider
-    public Iterator<Object[]> dataProviderSpellingMistakeRuEn() {
-        return getIterator(SPELLING_MISTAKE_TEST_DATA_DATA_RU_EN_JSON);
+    public Iterator<Object[]> checkTextProvider() {
+        return getIterator(CHECK_TEXT_TEST_DATA_JSON);
     }
 
     @DataProvider
-    public Iterator<Object[]> dataProviderSpellingMistakeUk() {
-        return getIterator(SPELLING_MISTAKE_TEST_DATA_DATA_UK_JSON);
+    public Iterator<Object[]> ignoreProvider() {
+        return getIterator(IGNORE_TEST_DATA_JSON);
     }
 
     @DataProvider
-    public Iterator<Object[]> dataProviderUpperCaseMistake() {
-        return getIterator(UPPER_CASE_MISTAKE_TEST_DATA_DATA_RU_EN_JSON);
-    }
-
-    @DataProvider
-    public Iterator<Object[]> dataProviderUpperCaseMistakeUk() {
-        return getIterator(UPPER_CASE_MISTAKE_TEST_DATA_DATA_UK_JSON);
-    }
-
-    @DataProvider
-    public Iterator<Object[]> dataProviderWordsDuplicationMistake() {
-        return getIterator(DUPLICATION_MISTAKE_TEST_DATA_DATA_JSON);
-    }
-
-    @DataProvider
-    public Iterator<Object[]> dataProviderIgnoreCapitalization() {
-        return getIterator(IGNORE_CAPITALIZATION_TEST_DATA_DATA_JSON);
-    }
-
-    @DataProvider
-    public Iterator<Object[]> dataProviderIgnoreDigits() {
-        return getIterator(IGNORE_DIGITS_TEST_DATA_DATA_JSON);
-    }
-
-    @DataProvider
-    public Iterator<Object[]> dataProviderIgnoreUrls() {
-        return getIterator(IGNORE_URLS_TEST_DATA_DATA_JSON);
-    }
-
-    @DataProvider
-    public Object[][] dataProviderCorrectWord() {
-        return new Object[][]{
-                {"dog"},
-                {"собака"}
-        };
+    public Iterator<Object[]> fullResponseProvider() {
+        return getIterator(FULL_RESPONSE_DATA_JSON);
     }
 
     private Iterator<Object[]> getIterator(String path) {

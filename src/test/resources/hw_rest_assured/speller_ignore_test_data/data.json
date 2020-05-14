@@ -1,0 +1,44 @@
+[
+  {
+    "id": "3",
+    "textRequest" : "мОСКВА",
+    "options": "IGNORE_CAPITALIZATION",
+    "lang": "DEFAULT"
+  },
+  {
+    "id": "4",
+    "textRequest" : "london",
+    "options": "IGNORE_CAPITALIZATION",
+    "lang": "DEFAULT"
+  },
+  {
+    "id": "5",
+    "textRequest" : "любит123",
+    "options": "IGNORE_DIGITS",
+    "lang": "DEFAULT"
+  },
+  {
+    "id": "6",
+    "textRequest" : "helo123",
+    "options": "IGNORE_DIGITS",
+    "lang": "DEFAULT"
+  },
+  {
+    "id": "7",
+    "textRequest" : "helo@email.ru",
+    "options": "IGNORE_URLS",
+    "lang": "DEFAULT"
+  },
+  {
+    "id": "8",
+    "textRequest" : "epam.com",
+    "options": "IGNORE_URLS",
+    "lang": "DEFAULT"
+  },
+  {
+    "id": "8",
+    "textRequest" : "красота",
+    "options": "DEFAULT",
+    "lang": "DEFAULT"
+  }
+]

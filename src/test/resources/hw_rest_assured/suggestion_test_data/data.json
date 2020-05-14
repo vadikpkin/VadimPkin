@@ -1,0 +1,61 @@
+[
+  {
+    "id": "1",
+    "textRequest": "very very good",
+    "suggestionsTexts": [],
+    "options": "FIND_REPEAT_WORDS",
+    "lang": "DEFAULT"
+  },
+  {
+    "id": "2",
+    "textRequest": "много много малока",
+    "suggestionsTexts": [
+      "",
+      "молока"
+    ],
+    "options": "FIND_REPEAT_WORDS",
+    "lang": "DEFAULT"
+  },
+  {
+    "id": "11",
+    "textRequest" : "важiль",
+    "suggestionsTexts": ["важіль"],
+    "options": "DEFAULT",
+    "lang": "UKRAINIAN"
+  },
+  {
+    "id": "12",
+    "textRequest" : "сгідна зразок",
+    "suggestionsTexts": ["східна згідно згідна гідна східно"],
+    "options": "DEFAULT",
+    "lang": "UKRAINIAN"
+  },
+  {
+    "id": "13",
+    "textRequest" : "кросивая мОСКВА",
+    "suggestionsTexts": ["красивая", "Москва"],
+    "options": "DEFAULT",
+    "lang": "DEFAULT"
+  },
+  {
+    "id": "14",
+    "textRequest" : "важим пкин",
+    "suggestionsTexts": ["Вадим вашим вяжем", "Пекин кин"],
+    "options": "DEFAULT",
+    "lang": "DEFAULT"
+  },
+  {
+    "id": "15",
+    "textRequest" : "болгарія",
+    "suggestionsTexts": ["Болгарія"],
+    "options": "DEFAULT",
+    "lang": "UKRAINIAN"
+  },
+  {
+    "id": "16",
+    "textRequest" : "естонія таллінн",
+    "suggestionsTexts": ["Естонія", "Таллінн"],
+    "options": "DEFAULT",
+    "lang": "UKRAINIAN"
+  }
+]
